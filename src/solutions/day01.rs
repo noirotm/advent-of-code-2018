@@ -1,0 +1,48 @@
+use solver::Solver;
+use std::collections::HashSet;
+use std::io;
+use std::io::BufRead;
+use std::io::BufReader;
+
+pub struct Day01;
+
+impl Solver for Day01 {
+    type Input = Vec<i64>;
+    type Output1 = i64;
+    type Output2 = i64;
+
+    fn day() -> u32 {
+        1
+    }
+
+    fn parse_input<R: io::Read>(r: R) -> io::Result<Vec<i64>> {
+        let r = BufReader::new(r);
+        let v = r
+            .lines()
+            .filter_map(|l| l.ok())
+            .map(|l| l.parse::<i64>())
+            .filter_map(|i| i.ok())
+            .collect();
+        Ok(v)
+    }
+
+    fn solve_first(input: &Vec<i64>) -> i64 {
+        input.iter().sum()
+    }
+
+    fn solve_second(input: &Vec<i64>) -> i64 {
+        let mut frequencies = HashSet::new();
+        let mut frequency = 0i64;
+
+        for v in input.iter().cycle() {
+            frequency += v;
+            if frequencies.contains(&frequency) {
+                return frequency;
+            } else {
+                frequencies.insert(frequency);
+            }
+        }
+
+        unreachable!()
+    }
+}
