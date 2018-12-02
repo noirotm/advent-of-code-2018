@@ -12,6 +12,7 @@ fn main() {
 
     match day.as_str() {
         "1" => Day01::solve(),
+        "2" => Day02::solve(),
         d => println!("Day {} hasn't been solved yet :(", d)
     }
 }

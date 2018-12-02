@@ -1,10 +1,17 @@
+use std::fmt::Display;
 use std::fs::File;
 use std::io;
 use std::path::Path;
-use std::fmt::Display;
+use std::io::BufReader;
+use std::io::BufRead;
 
 fn input_file(day: u32) -> String {
     format!("input/day{:02}", day)
+}
+
+pub fn read_to_vec<R: io::Read>(r: R) -> Vec<String> {
+    let r = BufReader::new(r);
+    r.lines().filter_map(|l| l.ok()).collect()
 }
 
 pub trait Solver {
@@ -23,8 +30,8 @@ pub trait Solver {
     }
 
     fn solve() {
-        let input =
-            Self::load_input(input_file(Self::day())).expect("unable to open input file");
+        let input_file = input_file(Self::day());
+        let input = Self::load_input(input_file).expect("unable to open input file");
         let s1 = Self::solve_first(&input);
         let s2 = Self::solve_second(&input);
         println!("Solution 1: {}", s1);
