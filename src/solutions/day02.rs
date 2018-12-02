@@ -1,6 +1,5 @@
 use solver::read_to_vec;
 use solver::Solver;
-use std::cmp::min;
 use std::io;
 
 pub struct Day02;
@@ -77,8 +76,7 @@ fn common_letters(s1: &str, s2: &str) -> Option<String> {
     for (c1, c2) in s1.chars().zip(s2.chars()) {
         if c1 == c2 {
             s.push(c1);
-        }
-        else {
+        } else {
             diffs += 1;
             if diffs > 1 {
                 return None;
@@ -88,8 +86,7 @@ fn common_letters(s1: &str, s2: &str) -> Option<String> {
 
     if diffs == 1 {
         Some(s)
-    }
-    else {
+    } else {
         None
     }
 }
