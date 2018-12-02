@@ -34,6 +34,8 @@ impl Solver for Day01 {
         let mut frequencies = HashSet::new();
         let mut frequency = 0i64;
 
+        frequencies.insert(0);
+
         for v in input.iter().cycle() {
             frequency += v;
             if frequencies.contains(&frequency) {
