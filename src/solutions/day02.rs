@@ -2,8 +2,6 @@ use solver::read_to_vec;
 use solver::Solver;
 use std::cmp::min;
 use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
 
 pub struct Day02;
 
@@ -16,8 +14,8 @@ impl Solver for Day02 {
         2
     }
 
-    fn parse_input<R: io::Read>(r: R) -> io::Result<Vec<String>> {
-        Ok(read_to_vec(r))
+    fn parse_input<R: io::Read>(r: R) -> Vec<String> {
+        read_to_vec(r)
     }
 
     fn solve_first(input: &Vec<String>) -> u64 {

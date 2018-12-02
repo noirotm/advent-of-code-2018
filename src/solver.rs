@@ -20,13 +20,13 @@ pub trait Solver {
     type Output2: Display;
 
     fn day() -> u32;
-    fn parse_input<R: io::Read>(r: R) -> io::Result<Self::Input>;
+    fn parse_input<R: io::Read>(r: R) -> Self::Input;
     fn solve_first(input: &Self::Input) -> Self::Output1;
     fn solve_second(input: &Self::Input) -> Self::Output2;
 
     fn load_input<P: AsRef<Path>>(p: P) -> io::Result<Self::Input> {
         let f = File::open(p)?;
-        Self::parse_input(f)
+        Ok(Self::parse_input(f))
     }
 
     fn solve() {

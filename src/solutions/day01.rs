@@ -15,15 +15,13 @@ impl Solver for Day01 {
         1
     }
 
-    fn parse_input<R: io::Read>(r: R) -> io::Result<Vec<i64>> {
+    fn parse_input<R: io::Read>(r: R) -> Vec<i64> {
         let r = BufReader::new(r);
-        let v = r
-            .lines()
+        r.lines()
             .filter_map(|l| l.ok())
             .map(|l| l.parse::<i64>())
             .filter_map(|i| i.ok())
-            .collect();
-        Ok(v)
+            .collect()
     }
 
     fn solve_first(input: &Vec<i64>) -> i64 {
