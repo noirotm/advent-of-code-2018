@@ -39,8 +39,8 @@ impl Solver for Day02 {
         // quadratic complexity :(
         for s1 in input {
             for s2 in input {
-                if differ_by_one_character(s1.as_str(), s2.as_str()) {
-                    return common_letters(s1, s2);
+                if let Some(s) = common_letters(s1, s2) {
+                    return s;
                 }
             }
         }
@@ -70,31 +70,26 @@ fn has_letters(s: &str) -> (bool, bool) {
     (has_two, has_three)
 }
 
-fn differ_by_one_character(s1: &str, s2: &str) -> bool {
+fn common_letters(s1: &str, s2: &str) -> Option<String> {
     let mut diffs = 0;
-    let l = min(s1.len(), s2.len());
-
-    for c in 0..l {
-        if s1.as_bytes()[c] != s2.as_bytes()[c] {
-            diffs += 1;
-        }
-        if diffs > 1 {
-            return false;
-        }
-    }
-
-    diffs == 1
-}
-
-fn common_letters(s1: &str, s2: &str) -> String {
-    let l = min(s1.len(), s2.len());
     let mut s = String::new();
 
-    for c in 0..l {
-        if s1.as_bytes()[c] == s2.as_bytes()[c] {
-            s.push_str(s1[c..c + 1].as_ref())
+    for (c1, c2) in s1.chars().zip(s2.chars()) {
+        if c1 == c2 {
+            s.push(c1);
+        }
+        else {
+            diffs += 1;
+            if diffs > 1 {
+                return None;
+            }
         }
     }
 
-    s
+    if diffs == 1 {
+        Some(s)
+    }
+    else {
+        None
+    }
 }
