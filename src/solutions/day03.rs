@@ -39,7 +39,7 @@ impl Solver for Day03 {
     }
 
     fn solve_first(input: &Vec<Rectangle>) -> u64 {
-        let mut occupied_areas: HashMap<(u32, u32), u64> = HashMap::new();
+        let mut occupied_areas = HashMap::new();
         let mut sol_area = 0;
 
         for r in input {
