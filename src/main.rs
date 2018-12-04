@@ -1,4 +1,4 @@
-extern crate core;
+extern crate chrono;
 extern crate regex;
 
 mod solver;
@@ -17,6 +17,7 @@ fn main() {
         "1" => Day01::solve(),
         "2" => Day02::solve(),
         "3" => Day03::solve(),
+        "4" => Day04::solve(),
         d => println!("Day {} hasn't been solved yet :(", d)
     }
 }
