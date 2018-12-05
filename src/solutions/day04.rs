@@ -106,7 +106,7 @@ impl Solver for Day04 {
     fn solve_second(input: &Vec<GuardEvent>) -> u32 {
         let mut current_id = 0;
         let mut last_asleep = None;
-        let mut minute_guards: HashMap<u32, HashMap<u32, u32>> = HashMap::new();
+        let mut minute_guards = HashMap::new();
 
         for evt in input {
             match evt.event {
