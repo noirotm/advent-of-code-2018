@@ -23,21 +23,16 @@ impl Solver for Day05 {
     }
 
     fn solve_second(input: &Vec<u8>) -> usize {
-        let r = b'a'..=b'z';
-        let mut min_val = input.len();
-        for c in r {
-            let v: Vec<_> = input
-                .iter()
-                .map(|b| *b)
-                .filter(|ch| ch != &c && ch != &c.to_ascii_uppercase())
-                .collect();
-            let size = size(v.as_slice());
-            if size < min_val {
-                min_val = size;
-            }
-        }
-
-        min_val
+        (b'a'..=b'z')
+            .map(|c| {
+                let v = input
+                    .iter()
+                    .map(|b| *b)
+                    .filter(|ch| ch != &c && ch != &c.to_ascii_uppercase())
+                    .collect::<Vec<_>>();
+                size(v.as_slice())
+            }).min_by_key(|e| *e)
+            .unwrap()
     }
 }
 
@@ -52,7 +47,8 @@ fn size(input: &[u8]) -> usize {
         if (a as i8 - b as i8).abs() == 32 {
             v.remove(pos);
             v.remove(pos);
-            pos = 0;
+
+            pos = if pos > 0 { pos - 1 } else { 0 };
         } else {
             pos += 1;
         }
