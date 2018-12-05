@@ -27,10 +27,10 @@ impl Solver for Day05 {
             .map(|c| {
                 let v = input
                     .iter()
+                    .filter(|&&ch| ch != c && ch != c.to_ascii_uppercase())
                     .map(|b| *b)
-                    .filter(|ch| ch != &c && ch != &c.to_ascii_uppercase())
                     .collect::<Vec<_>>();
-                size(v.as_slice())
+                size(&v)
             }).min_by_key(|e| *e)
             .unwrap()
     }
