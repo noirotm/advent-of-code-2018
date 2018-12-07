@@ -132,13 +132,13 @@ impl Solver for Day04 {
             }
         }
 
-        let r = minute_guards
+        let (minute, (guard, _)) = minute_guards
             .iter()
-            .map(|map| (map.0, map.1.iter().max_by(|a, b| a.1.cmp(b.1)).unwrap()))
-            .max_by(|a, b| (a.1).1.cmp((b.1).1))
+            .map(|(minute, guards)| (minute, guards.iter().max_by(|(_, a), (_, b)| a.cmp(b)).unwrap()))
+            .max_by(|(_, (_, a)), (_, (_, b))| a.cmp(b))
             .unwrap();
 
-        r.0 * (r.1).0
+        minute * guard
     }
 }
 
