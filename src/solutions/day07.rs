@@ -120,8 +120,6 @@ impl Solver for Day07 {
                     w.task = None;
 
                     n_done += 1;
-
-                    println!("Done: {}", task);
                 }
 
                 w.progress += 1;
@@ -134,7 +132,6 @@ impl Solver for Day07 {
                 .map(|(&k, _)| k)
                 .collect::<Vec<_>>();
             ready.sort();
-            println!("Available tasks: {:?}", ready);
 
             // affect available tasks to available workers
             for w in workers.iter_mut().filter(|w| w.task.is_none()) {
@@ -143,8 +140,6 @@ impl Solver for Day07 {
                     w.progress = 1;
 
                     dependencies.remove(&w.task.unwrap());
-
-                    println!("Worker got {}", w.task.unwrap());
                 }
             }
 
