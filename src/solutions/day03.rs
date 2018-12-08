@@ -19,23 +19,21 @@ impl Solver for Day03 {
 
     fn parse_input<R: io::Read>(r: R) -> Vec<Rectangle> {
         let re = Regex::new(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)").expect("Invalid regex");
-        let mut result = vec![];
 
-        for line in BufReader::new(r).lines().filter_map(|l| l.ok()) {
-            if let Some(r) = re.captures(line.as_str()).and_then(|c| {
-                Some(Rectangle {
-                    id: c.get(1).unwrap().as_str().parse().unwrap(),
-                    left: c.get(2).unwrap().as_str().parse().unwrap(),
-                    top: c.get(3).unwrap().as_str().parse().unwrap(),
-                    width: c.get(4).unwrap().as_str().parse().unwrap(),
-                    height: c.get(5).unwrap().as_str().parse().unwrap(),
+        BufReader::new(r)
+            .lines()
+            .filter_map(|l| l.ok())
+            .filter_map(|s| {
+                re.captures(s.as_str()).and_then(|c| {
+                    Some(Rectangle {
+                        id: c.get(1)?.as_str().parse().ok()?,
+                        left: c.get(2)?.as_str().parse().ok()?,
+                        top: c.get(3)?.as_str().parse().ok()?,
+                        width: c.get(4)?.as_str().parse().ok()?,
+                        height: c.get(5)?.as_str().parse().ok()?,
+                    })
                 })
-            }) {
-                result.push(r);
-            }
-        }
-
-        result
+            }).collect()
     }
 
     fn solve_first(input: &Vec<Rectangle>) -> u64 {
@@ -76,7 +74,7 @@ impl Solver for Day03 {
 
         for r in input {
             if !overlaps.contains(&r.id) {
-               return r.id;
+                return r.id;
             }
         }
 
