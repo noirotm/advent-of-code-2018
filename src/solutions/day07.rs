@@ -23,38 +23,22 @@ impl Solver for Day07 {
 
     fn parse_input<R: io::Read>(r: R) -> Vec<(char, char)> {
         let re = Regex::new(r"(.) must be finished before step (.)").expect("Invalid regex");
-        let mut result = vec![];
 
-        for line in BufReader::new(r).lines().filter_map(|l| l.ok()) {
-            if let Some(r) = re.captures(line.as_str()).and_then(|c| {
-                Some((
-                    c.get(2).unwrap().as_str().chars().next().unwrap(),
-                    c.get(1).unwrap().as_str().chars().next().unwrap(),
-                ))
-            }) {
-                result.push(r);
-            }
-        }
-
-        result
+        BufReader::new(r)
+            .lines()
+            .filter_map(|l| l.ok())
+            .filter_map(|s| {
+                re.captures(s.as_str()).and_then(|c| {
+                    Some((
+                        c.get(2)?.as_str().chars().next()?,
+                        c.get(1)?.as_str().chars().next()?,
+                    ))
+                })
+            }).collect()
     }
 
     fn solve_first(input: &Vec<(char, char)>) -> String {
-        let mut dependencies = HashMap::new();
-
-        // build dependency graph
-        for (c, dep) in input {
-            if !dependencies.contains_key(dep) {
-                dependencies.insert(*dep, HashSet::new());
-            }
-            if !dependencies.contains_key(c) {
-                dependencies.insert(*c, HashSet::new());
-            }
-
-            if let Some(deps) = dependencies.get_mut(c) {
-                deps.insert(*dep);
-            }
-        }
+        let mut dependencies = build_dependency_graph(input);
 
         let len = dependencies.len();
         let mut result = Vec::with_capacity(len);
@@ -79,21 +63,7 @@ impl Solver for Day07 {
     }
 
     fn solve_second(input: &Vec<(char, char)>) -> i32 {
-        let mut dependencies = HashMap::new();
-
-        // build dependency graph
-        for (c, dep) in input {
-            if !dependencies.contains_key(dep) {
-                dependencies.insert(*dep, HashSet::new());
-            }
-            if !dependencies.contains_key(c) {
-                dependencies.insert(*c, HashSet::new());
-            }
-
-            if let Some(deps) = dependencies.get_mut(c) {
-                deps.insert(*dep);
-            }
-        }
+        let mut dependencies = build_dependency_graph(input);
 
         // create free workers
         let mut workers = repeat_with(|| Worker {
@@ -151,11 +121,31 @@ impl Solver for Day07 {
     }
 }
 
+fn build_dependency_graph(input: &Vec<(char, char)>) -> HashMap<char, HashSet<char>> {
+    let mut dependencies = HashMap::new();
+
+    // build dependency graph
+    for (c, dep) in input {
+        if !dependencies.contains_key(dep) {
+            dependencies.insert(*dep, HashSet::new());
+        }
+        if !dependencies.contains_key(c) {
+            dependencies.insert(*c, HashSet::new());
+        }
+
+        if let Some(deps) = dependencies.get_mut(c) {
+            deps.insert(*dep);
+        }
+    }
+
+    dependencies
+}
+
 struct Worker {
     task: Option<char>,
     progress: u32,
 }
 
 fn task_duration(v: char) -> u32 {
-    (TASK_DURATION + (v as u8  - b'A') + 1) as u32
+    (TASK_DURATION + (v as u8 - b'A') + 1) as u32
 }
