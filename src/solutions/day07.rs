@@ -34,7 +34,8 @@ impl Solver for Day07 {
                         c.get(1)?.as_str().chars().next()?,
                     ))
                 })
-            }).collect()
+            })
+            .collect()
     }
 
     fn solve_first(input: &Vec<(char, char)>) -> String {
@@ -69,7 +70,8 @@ impl Solver for Day07 {
         let mut workers = repeat_with(|| Worker {
             task: None,
             progress: 0,
-        }).take(WORKERS)
+        })
+        .take(WORKERS)
         .collect::<Vec<_>>();
 
         let mut seconds = -1;

@@ -33,7 +33,8 @@ impl Solver for Day03 {
                         height: c.get(5)?.as_str().parse().ok()?,
                     })
                 })
-            }).collect()
+            })
+            .collect()
     }
 
     fn solve_first(input: &Vec<Rectangle>) -> u64 {

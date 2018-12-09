@@ -23,27 +23,22 @@ impl Solver for Day04 {
         let sleep_re = Regex::new(r"falls asleep").expect("Invalid regex");
         //let wake_re = Regex::new(r"wakes up").expect("Invalid regex");
 
-        let mut result = vec![];
-
-        for line in BufReader::new(r).lines().filter_map(|l| l.ok()) {
-            let date = date_re
-                .captures(line.as_str())
-                .unwrap()
-                .get(1)
-                .unwrap()
-                .as_str();
-            let date = Utc.datetime_from_str(date, "%Y-%m-%d %H:%M").unwrap();
-
-            let event = if let Some(c) = shift_re.captures(line.as_str()) {
-                Event::Shift(c.get(1).unwrap().as_str().parse().unwrap())
-            } else if sleep_re.is_match(line.as_str()) {
-                Event::Asleep
-            } else {
-                Event::Awake
-            };
-
-            result.push(GuardEvent { event, date });
-        }
+        let mut result = BufReader::new(r)
+            .lines()
+            .filter_map(|l| l.ok())
+            .filter_map(|s| {
+                let date = date_re.captures(s.as_str())?.get(1)?.as_str();
+                let date = Utc.datetime_from_str(date, "%Y-%m-%d %H:%M").ok()?;
+                let event = if let Some(c) = shift_re.captures(s.as_str()) {
+                    Event::Shift(c.get(1).unwrap().as_str().parse().unwrap())
+                } else if sleep_re.is_match(s.as_str()) {
+                    Event::Asleep
+                } else {
+                    Event::Awake
+                };
+                Some(GuardEvent { event, date })
+            })
+            .collect::<Vec<_>>();
 
         result.sort_by(|a, b| a.date.cmp(&b.date));
 
@@ -80,7 +75,7 @@ impl Solver for Day04 {
                     }
 
                     let minutes_range = last_asleep.unwrap().minute()..evt.date.minute();
-                    if let None = guard_minutes.get(&current_id) {
+                    if !guard_minutes.contains_key(&current_id) {
                         guard_minutes.insert(current_id, HashMap::new());
                     }
                     let mut map = guard_minutes.get_mut(&current_id).unwrap();
@@ -120,7 +115,7 @@ impl Solver for Day04 {
                     let minutes_range = last_asleep.unwrap().minute()..evt.date.minute();
 
                     for i in minutes_range {
-                        if let None = minute_guards.get(&i) {
+                        if !minute_guards.contains_key(&i) {
                             minute_guards.insert(i, HashMap::new());
                         }
                         let mut map = minute_guards.get_mut(&i).unwrap();
@@ -134,7 +129,12 @@ impl Solver for Day04 {
 
         let (minute, (guard, _)) = minute_guards
             .iter()
-            .map(|(minute, guards)| (minute, guards.iter().max_by(|(_, a), (_, b)| a.cmp(b)).unwrap()))
+            .map(|(minute, guards)| {
+                (
+                    minute,
+                    guards.iter().max_by(|(_, a), (_, b)| a.cmp(b)).unwrap(),
+                )
+            })
             .max_by(|(_, (_, a)), (_, (_, b))| a.cmp(b))
             .unwrap();
 

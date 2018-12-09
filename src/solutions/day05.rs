@@ -31,7 +31,8 @@ impl Solver for Day05 {
                     .map(|b| *b)
                     .collect::<Vec<_>>();
                 size(&v)
-            }).min_by_key(|e| *e)
+            })
+            .min_by_key(|e| *e)
             .unwrap()
     }
 }

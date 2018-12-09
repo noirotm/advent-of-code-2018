@@ -25,7 +25,8 @@ impl Solver for Day06 {
                 let x = s.next().unwrap().parse().unwrap();
                 let y = s.next().unwrap().parse().unwrap();
                 Pt { x, y }
-            }).collect()
+            })
+            .collect()
     }
 
     fn solve_first(input: &Vec<Pt>) -> u64 {
@@ -80,10 +81,7 @@ impl Solver for Day06 {
         for x in min_x..=max_x {
             for y in min_y..=max_y {
                 let current_point = Pt { x, y };
-                let total_dist: i32 = input
-                    .iter()
-                    .map(|pt| pt.dist(&current_point))
-                    .sum();
+                let total_dist: i32 = input.iter().map(|pt| pt.dist(&current_point)).sum();
 
                 if total_dist < 10000 {
                     areas.insert(current_point, total_dist);

@@ -19,8 +19,7 @@ impl Solver for Day01 {
         let r = BufReader::new(r);
         r.lines()
             .filter_map(|l| l.ok())
-            .map(|l| l.parse::<i64>())
-            .filter_map(|i| i.ok())
+            .filter_map(|l| l.parse().ok())
             .collect()
     }
 

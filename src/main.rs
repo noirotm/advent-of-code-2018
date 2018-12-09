@@ -1,17 +1,15 @@
 extern crate chrono;
 extern crate regex;
 
-mod solver;
 mod solutions;
+mod solver;
 
 use solutions::*;
 use solver::Solver;
 use std::env;
 
 fn main() {
-    let day = env::args()
-        .nth(1)
-        .unwrap_or(String::from("1"));
+    let day = env::args().nth(1).unwrap_or(String::from("1"));
 
     match day.as_str() {
         "1" => Day01::solve(),
@@ -22,6 +20,6 @@ fn main() {
         "6" => Day06::solve(),
         "7" => Day07::solve(),
         "8" => Day08::solve(),
-        d => println!("Day {} hasn't been solved yet :(", d)
+        d => println!("Day {} hasn't been solved yet :(", d),
     }
 }
