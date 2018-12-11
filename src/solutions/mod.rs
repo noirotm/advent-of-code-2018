@@ -27,3 +27,6 @@ pub use self::day09::Day09;
 
 mod day10;
 pub use self::day10::Day10;
+
+mod day11;
+pub use self::day11::Day11;
