@@ -1,6 +1,5 @@
 use solver::Solver;
 use std::cmp::min;
-use std::collections::HashMap;
 use std::io;
 
 pub struct Day11;
@@ -30,7 +29,7 @@ impl Solver for Day11 {
                 for j in 0..3 {
                     for i in 0..3 {
                         let pt = Pt { x: x + i, y: y + j };
-                        let power = powers.get(&pt).unwrap();
+                        let power = get_power(&powers, &pt);
                         sum += power;
                     }
                 }
@@ -73,7 +72,7 @@ impl Solver for Day11 {
                             x: x + i,
                             y: y + (n - 1),
                         };
-                        let power = powers.get(&pt).unwrap();
+                        let power = get_power(&powers, &pt);
                         current_sum += power;
                     }
                     for i in 0..n - 1 {
@@ -81,7 +80,7 @@ impl Solver for Day11 {
                             x: x + (n - 1),
                             y: y + i,
                         };
-                        let power = powers.get(&pt).unwrap();
+                        let power = get_power(&powers, &pt);
                         current_sum += power;
                     }
 
@@ -121,16 +120,22 @@ fn power(pt: &Pt, serial_number: i32) -> i32 {
     (p / 100) % 10 - 5
 }
 
-fn compute_all_powers(serial_number: i32) -> HashMap<Pt, i32> {
-    let mut map = HashMap::new();
+fn compute_all_powers(serial_number: i32) -> Vec<i32> {
+    let mut sol = Vec::with_capacity(300*300);
     for y in 1..=300 {
         for x in 1..=300 {
             let pt = Pt { x, y };
             let pow = power(&pt, serial_number);
-            map.insert(pt, pow);
+            sol.push(pow);
         }
     }
-    map
+    sol
+}
+
+#[inline]
+fn get_power(powers: &Vec<i32>, pt: &Pt) -> i32 {
+    let i = (pt.x-1) + (pt.y-1) * 300;
+    *powers.get(i as usize).unwrap_or(&0)
 }
 
 struct SquarePower {
