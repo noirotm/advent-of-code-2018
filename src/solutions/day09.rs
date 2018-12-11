@@ -28,7 +28,7 @@ impl Solver for Day09 {
 
     fn solve_first(&(num_players, num_marbles): &(usize, usize)) -> u64 {
         let mut players = vec![0u64; num_players];
-        let mut circle = Circle::with_capacity(num_marbles+1);
+        let mut circle = Circle::with_capacity(num_marbles + 1);
 
         for (marble, player) in (1..=num_marbles)
             .into_iter()

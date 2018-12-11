@@ -69,12 +69,18 @@ impl Solver for Day11 {
                 let mut current_sum = 0;
                 for n in 1..=size {
                     for i in 0..n {
-                        let pt = Pt { x: x + i, y: y + (n - 1) };
+                        let pt = Pt {
+                            x: x + i,
+                            y: y + (n - 1),
+                        };
                         let power = powers.get(&pt).unwrap();
                         current_sum += power;
                     }
-                    for i in 0..n-1 {
-                        let pt = Pt { x: x + (n - 1), y: y + i };
+                    for i in 0..n - 1 {
+                        let pt = Pt {
+                            x: x + (n - 1),
+                            y: y + i,
+                        };
                         let power = powers.get(&pt).unwrap();
                         current_sum += power;
                     }
@@ -84,14 +90,6 @@ impl Solver for Day11 {
                         size: n as usize,
                         power: current_sum,
                     };
-
-                    /*println!(
-                        "{},{},{},{}",
-                        current_square.pt.x,
-                        current_square.pt.y,
-                        current_square.size,
-                        current_square.power,
-                    );*/
 
                     let max_pow = max_square.as_ref().map(|sp| sp.power).unwrap_or(0);
                     if max_pow < current_sum {
