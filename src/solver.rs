@@ -20,7 +20,7 @@ pub trait Solver {
     type Output2: Display;
 
     fn day() -> u32;
-    fn parse_input<R: io::Read>(r: R) -> Self::Input;
+    fn parse_input<R: io::Seek + io::Read>(r: R) -> Self::Input;
     fn solve_first(input: &Self::Input) -> Self::Output1;
     fn solve_second(input: &Self::Input) -> Self::Output2;
 
