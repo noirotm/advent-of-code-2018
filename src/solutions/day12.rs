@@ -1,5 +1,4 @@
 use solver::Solver;
-use std::cmp::max;
 use std::collections::HashMap;
 use std::io;
 use std::io::BufRead;
@@ -57,7 +56,8 @@ impl Solver for Day12 {
     }
 
     fn solve_second(input: &LifeInput) -> i64 {
-        solve_for_generations(&input, 50000000000)
+        //solve_for_generations(&input, 50000000000)
+        solve_for_last_gen()
     }
 }
 
@@ -70,18 +70,18 @@ pub struct LifeInput {
 #[derive(Debug)]
 pub struct State {
     pots: Vec<u8>,
-    initial_index: i32,
+    initial_index: i64,
 }
 
 fn next_state(current_state: &State, rules: &HashMap<Vec<u8>, u8>) -> State {
     let first_alive_pos = current_state.pots.iter().position(|&e| e == b'#').unwrap();
     let last_alive_pos = current_state.pots.iter().rposition(|&e| e == b'#').unwrap();
-    let left_extension = max(0, 2 - first_alive_pos as isize) as usize;
-    let right_extension = max(0, 2 + last_alive_pos as isize) as usize;
+    let left_extension = 2 - first_alive_pos as isize;
+    let right_extension = 2 + last_alive_pos as isize;
 
     let mut output = State {
-        pots: vec![b'.'; left_extension + right_extension],
-        initial_index: current_state.initial_index - left_extension as i32,
+        pots: vec![b'.'; (left_extension + right_extension) as usize],
+        initial_index: current_state.initial_index - left_extension as i64,
     };
 
     for (i, p) in output.pots.iter_mut().enumerate() {
@@ -118,16 +118,46 @@ fn solve_for_generations(input: &LifeInput, generations: u64) -> i64 {
     for i in 1..=generations {
         state = next_state(&state, &input.rules);
 
-        println!("{} {}", i, String::from_utf8(state.pots.clone()).unwrap());
+        let sum: i64 = state
+            .pots
+            .iter()
+            .enumerate()
+            .filter(|&(_, &c)| c == b'#')
+            .map(|(i, _)| i as i64 + state.initial_index as i64)
+            .sum();
 
-
+        println!(
+            "{}={}:{} {}",
+            i,
+            sum,
+            state.initial_index,
+            String::from_utf8(state.pots.clone()).unwrap()
+        );
+        if i % 1000 == 0 {
+            println!("{} ", i)
+        }
     }
 
     state
         .pots
         .iter()
         .enumerate()
-        .filter(|&(i, &c)| c == b'#')
+        .filter(|&(_, &c)| c == b'#')
+        .map(|(i, _)| i as i64 + state.initial_index as i64)
+        .sum()
+}
+
+fn solve_for_last_gen() -> i64 {
+    let state = State {
+        pots: "...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###..###..###".to_string().into_bytes(),
+        initial_index: 50000000000-37,
+    };
+
+    state
+        .pots
+        .iter()
+        .enumerate()
+        .filter(|&(_, &c)| c == b'#')
         .map(|(i, _)| i as i64 + state.initial_index as i64)
         .sum()
 }
