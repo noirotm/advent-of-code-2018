@@ -55,7 +55,7 @@ impl Solver for Day12 {
         solve_for_generations(&input, 20)
     }
 
-    fn solve_second(input: &LifeInput) -> i64 {
+    fn solve_second(_input: &LifeInput) -> i64 {
         //solve_for_generations(&input, 50000000000)
         solve_for_last_gen()
     }
@@ -148,9 +148,11 @@ fn solve_for_generations(input: &LifeInput, generations: u64) -> i64 {
 }
 
 fn solve_for_last_gen() -> i64 {
+    let stable_pattern = "...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###..###..###";
+
     let state = State {
-        pots: "...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###...###..###..###".to_string().into_bytes(),
-        initial_index: 50000000000-37,
+        pots: stable_pattern.to_string().into_bytes(),
+        initial_index: 50000000000 - 37,
     };
 
     state
