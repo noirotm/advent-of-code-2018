@@ -71,7 +71,7 @@ impl Solver for Day13 {
     fn solve_second(input: &RailSystem) -> String {
         let mut sys = input.clone();
         loop {
-            let collisions = sys.step();
+            let _ = sys.step();
 
             if sys.carts.len() == 1 {
                 return format!("{},{}", sys.carts[0].pos.x, sys.carts[0].pos.y);
