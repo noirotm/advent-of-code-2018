@@ -24,10 +24,10 @@ impl Solver for Day15 {
     }
 
     fn solve_first(input: &Map) -> i64 {
-        /*let mut map = input.clone();
+        let mut map = input.clone();
         loop {
             let status = map.round();
-            map.debug();
+            //map.debug();
 
             if let Status::Win(t) = status {
                 let units = map.find_targets_of_type(t);
@@ -38,8 +38,7 @@ impl Solver for Day15 {
 
                 return hp as i64 * map.rounds as i64;
             }
-        }*/
-        0
+        }
     }
 
     fn solve_second(input: &Map) -> i64 {
@@ -52,10 +51,15 @@ impl Solver for Day15 {
 
             loop {
                 let status = map.round();
-                map.debug();
+                //map.debug();
 
-                if let Status::Win(t) = status {
-                    let remaining_elves = map.find_targets_of_type(UnitType::Elf);
+                // quit as soon as an elf dies
+                let remaining_elves = map.find_targets_of_type(UnitType::Elf);
+                if remaining_elves.len() < start_elves {
+                    break;
+                }
+
+                if let Status::Win(UnitType::Elf) = status {
                     let hp = remaining_elves.iter().map(|u| u.unit.hp).sum::<usize>();
 
                     println!("Attack power: {}", elf_atk);
