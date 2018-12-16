@@ -121,7 +121,7 @@ fn power(pt: &Pt, serial_number: i32) -> i32 {
 }
 
 fn compute_all_powers(serial_number: i32) -> Vec<i32> {
-    let mut sol = Vec::with_capacity(300*300);
+    let mut sol = Vec::with_capacity(300 * 300);
     for y in 1..=300 {
         for x in 1..=300 {
             let pt = Pt { x, y };
@@ -134,7 +134,7 @@ fn compute_all_powers(serial_number: i32) -> Vec<i32> {
 
 #[inline]
 fn get_power(powers: &Vec<i32>, pt: &Pt) -> i32 {
-    let i = (pt.x-1) + (pt.y-1) * 300;
+    let i = (pt.x - 1) + (pt.y - 1) * 300;
     *powers.get(i as usize).unwrap_or(&0)
 }
 

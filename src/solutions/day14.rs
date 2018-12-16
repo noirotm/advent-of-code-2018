@@ -26,7 +26,6 @@ impl Solver for Day14 {
             .expect("invalid integer");
 
         let mut elves = [0usize, 1usize];
-
         let mut recipes = vec![3, 7];
 
         loop {
@@ -49,18 +48,13 @@ impl Solver for Day14 {
 
             if recipes.len() > n + 10 {
                 let r = &recipes[n..n + 10];
-                return recipes_str(r)
+                return recipes_str(r);
             }
         }
     }
 
     fn solve_second(input: &Vec<u8>) -> usize {
-        let n = recipes_str(input)
-            .parse::<usize>()
-            .expect("invalid integer");
-
         let mut elves = [0usize, 1usize];
-
         let mut recipes = vec![3, 7];
 
         loop {

@@ -63,7 +63,7 @@ impl Solver for Day13 {
         loop {
             let collisions = sys.step();
             if !collisions.is_empty() {
-                return format!("{},{}", collisions[0].x, collisions[0].y)
+                return format!("{},{}", collisions[0].x, collisions[0].y);
             }
         }
     }
@@ -87,6 +87,7 @@ pub struct RailSystem {
 }
 
 impl RailSystem {
+    #[allow(dead_code)]
     fn debug(&self) {
         let mut tracks = self.tracks.clone();
         for cart in self.carts.iter() {
