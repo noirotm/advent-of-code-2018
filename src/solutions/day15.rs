@@ -283,9 +283,6 @@ impl Map {
             .take(self.dims.1)
             .collect::<Vec<_>>();
 
-        // create set of processed elements
-        let mut processed = BTreeSet::new();
-
         // create set from destination points
         let dest_set = destinations.iter().collect::<BTreeSet<_>>();
 
@@ -309,7 +306,8 @@ impl Map {
             }
 
             for p in pos.neighbours().iter() {
-                if processed.contains(p) {
+                // already processed
+                if costs[p.y][p.x] != MAX {
                     continue;
                 }
 
@@ -318,8 +316,6 @@ impl Map {
                     to_process.push_back(p.clone());
                 }
             }
-
-            processed.insert(pos);
         }
 
         // find closest destination
