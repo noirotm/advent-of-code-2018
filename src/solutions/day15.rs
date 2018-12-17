@@ -111,6 +111,7 @@ impl Map {
         }
     }
 
+    #[allow(dead_code)]
     fn debug(&self) {
         let (w, h) = self.dims;
         for y in 0..h {
@@ -294,15 +295,23 @@ impl Map {
         costs[start.y][start.x] = 0;
 
         // find a cost to each open point in the map from the source
-        let mut closest_dest = None;
+        let mut closest_dest: Option<Pos> = None;
         while !to_process.is_empty() {
             let pos = to_process.pop_front().unwrap();
             let cost = costs[pos.y][pos.x] + 1;
 
-            // if we found one of our targets, stop
+            // if we found one of our targets, use it
             if dest_set.contains(&pos) {
-                closest_dest = Some(pos.clone());
-                break;
+                let current_dest = pos.clone();
+
+                if let Some(p) = closest_dest.clone() {
+                    // keep the point that is the "smaller" in terms of order
+                    if costs[current_dest.y][current_dest.x] == costs[p.y][p.x] && current_dest < p{
+                        closest_dest = Some(current_dest);
+                    }
+                } else {
+                    closest_dest = Some(pos.clone());
+                }
             }
 
             for p in pos.neighbours().iter() {
