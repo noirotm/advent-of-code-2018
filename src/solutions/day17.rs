@@ -73,8 +73,6 @@ impl Solver for Day17 {
 struct Grid {
     cells: Vec<Vec<u8>>,
     bounds: Bounds,
-    //width: usize,
-    //height: usize,
 }
 
 impl Grid {
@@ -89,8 +87,6 @@ impl Grid {
         Self {
             cells,
             bounds,
-            //width,
-            //height,
         }
     }
 
