@@ -30,6 +30,7 @@ fn main() {
         "15" => Day15::solve(),
         "16" => Day16::solve(),
         "17" => Day17::solve(),
+        "18" => Day18::solve(),
         d => println!("Day {} hasn't been solved yet :(", d),
     }
 }
