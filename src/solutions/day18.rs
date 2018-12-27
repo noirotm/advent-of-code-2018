@@ -73,7 +73,7 @@ impl Solver for Day18 {
         // warp to the last minute before 1000000000 that has this pattern
         let cycles = (1000000000 - first_repeat_minute) / period;
         let warp_to = first_repeat_minute + period * cycles;
-        for minute in warp_to+1..=1000000000 {
+        for _minute in warp_to+1..=1000000000 {
             g = g.next_minute();
         }
 
