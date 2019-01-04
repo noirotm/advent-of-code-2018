@@ -20,19 +20,23 @@ impl Solver for Day21 {
     }
 
     fn solve_first(input: &Program) -> u64 {
-        let mut vm = Machine::new();
-        input.execute(&mut vm);
+        for i in 1..60000000 {
+            let mut vm = Machine::new();
+            vm.registers[0] = i;
 
-        vm.registers[0]
+            let n = input.execute(&mut vm);
+
+            //println!("{} => {}", i, n);
+
+            if n < 12000 {
+                return i;
+            }
+        }
+        0
     }
 
     fn solve_second(input: &Program) -> u64 {
-        let mut vm = Machine::new();
-        vm.registers[0] = 1;
-
-        input.execute_with_ip(&mut vm, 0);
-
-        vm.registers[0]
+        0
     }
 }
 
@@ -155,6 +159,11 @@ impl Program {
                 // increment for next instruction
                 ip += 1;
                 n_exec += 1;
+
+                // security
+                if n_exec >= 12000 {
+                    break;
+                }
 
             //let _ = io::stdin().read(&mut [0u8]).unwrap();
             } else {
