@@ -5,8 +5,8 @@ extern crate core;
 mod solutions;
 mod solver;
 
-use solutions::*;
-use solver::Solver;
+use crate::solutions::*;
+use crate::solver::Solver;
 use std::env;
 
 fn main() {

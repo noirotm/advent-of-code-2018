@@ -1,5 +1,5 @@
-use solver::read_to_vec;
-use solver::Solver;
+use crate::solver::read_to_vec;
+use crate::solver::Solver;
 use std::io;
 
 pub struct Day02;

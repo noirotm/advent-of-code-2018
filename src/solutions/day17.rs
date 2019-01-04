@@ -1,5 +1,5 @@
 use regex::Regex;
-use solver::Solver;
+use crate::solver::Solver;
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::fmt::Error;

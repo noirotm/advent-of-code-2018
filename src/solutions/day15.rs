@@ -1,4 +1,4 @@
-use solver::Solver;
+use crate::solver::Solver;
 use std::cmp::Ordering;
 use std::collections::BTreeSet;
 use std::collections::VecDeque;

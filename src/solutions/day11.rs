@@ -1,4 +1,4 @@
-use solver::Solver;
+use crate::solver::Solver;
 use std::cmp::min;
 use std::io;
 

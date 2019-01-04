@@ -1,4 +1,4 @@
-use solver::Solver;
+use crate::solver::Solver;
 use std::io;
 use std::io::BufRead;
 use std::io::BufReader;

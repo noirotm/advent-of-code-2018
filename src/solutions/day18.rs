@@ -1,4 +1,4 @@
-use solver::Solver;
+use crate::solver::Solver;
 use std::collections::hash_map::DefaultHasher;
 use std::fmt::Debug;
 use std::fmt::Error;
