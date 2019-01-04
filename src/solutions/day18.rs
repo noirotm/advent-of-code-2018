@@ -1,16 +1,16 @@
 use crate::solver::Solver;
 use std::collections::hash_map::DefaultHasher;
+use std::collections::HashMap;
 use std::fmt::Debug;
 use std::fmt::Error;
 use std::fmt::Formatter;
 use std::fmt::Write;
+use std::hash::Hash;
+use std::hash::Hasher;
 use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 use std::iter::repeat;
-use std::hash::Hash;
-use std::hash::Hasher;
-use std::collections::HashMap;
 
 pub struct Day18;
 
@@ -35,8 +35,18 @@ impl Solver for Day18 {
             //println!("{:?}", g);
         }
 
-        let n_trees: u64 = g.cells.iter().flatten().map(|&b| if b == b'|' { 1 } else { 0 }).sum();
-        let n_lumbs: u64 = g.cells.iter().flatten().map(|&b| if b == b'#' { 1 } else { 0 }).sum();
+        let n_trees: u64 = g
+            .cells
+            .iter()
+            .flatten()
+            .map(|&b| if b == b'|' { 1 } else { 0 })
+            .sum();
+        let n_lumbs: u64 = g
+            .cells
+            .iter()
+            .flatten()
+            .map(|&b| if b == b'#' { 1 } else { 0 })
+            .sum();
 
         n_trees * n_lumbs
     }
@@ -73,12 +83,22 @@ impl Solver for Day18 {
         // warp to the last minute before 1000000000 that has this pattern
         let cycles = (1000000000 - first_repeat_minute) / period;
         let warp_to = first_repeat_minute + period * cycles;
-        for _minute in warp_to+1..=1000000000 {
+        for _minute in warp_to + 1..=1000000000 {
             g = g.next_minute();
         }
 
-        let n_trees: u64 = g.cells.iter().flatten().map(|&b| if b == b'|' { 1 } else { 0 }).sum();
-        let n_lumbs: u64 = g.cells.iter().flatten().map(|&b| if b == b'#' { 1 } else { 0 }).sum();
+        let n_trees: u64 = g
+            .cells
+            .iter()
+            .flatten()
+            .map(|&b| if b == b'|' { 1 } else { 0 })
+            .sum();
+        let n_lumbs: u64 = g
+            .cells
+            .iter()
+            .flatten()
+            .map(|&b| if b == b'#' { 1 } else { 0 })
+            .sum();
 
         n_trees * n_lumbs
     }

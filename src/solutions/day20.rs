@@ -29,7 +29,7 @@ impl Solver for Day20 {
     }
 }
 
-#[derive(Clone,Debug)]
+#[derive(Clone, Debug)]
 pub enum Dir {
     N,
     S,
@@ -51,52 +51,52 @@ impl Directions {
     }
 
     /*fn to_tree(&self) -> Directions {
-        let mut queue = VecDeque::new();
-        queue.push_back(vec![0usize]);
+    let mut queue = VecDeque::new();
+    queue.push_back(vec![0usize]);
 
-        let mut tree = vec![];
-        let mut current_branch = &mut tree;
+    let mut tree = vec![];
+    let mut current_branch = &mut tree;
 
-        while let Some(idx) = queue.pop_front() {
-            let d = self.nested_get(&idx);
-            match d {
-                /*Some(Directions::Dir(dir)) => {
-                    current_branch.push(Directions::Dir(dir.clone()));
-                }*/
-                Some(Directions::Seq(seq)) => {
-                    for (i, e) in seq.iter().enumerate() {
-                        match e {
-                            Directions::Dir(dir) => current_branch.push(Directions::Dir(dir.clone())),
-                            Directions::Choice(_) => {
-                                // push choice index
-                                let mut choice_idx = idx.clone();
-                                choice_idx.push(i);
-                                queue.push_back(choice_idx);
+    while let Some(idx) = queue.pop_front() {
+        let d = self.nested_get(&idx);
+        match d {
+            /*Some(Directions::Dir(dir)) => {
+                current_branch.push(Directions::Dir(dir.clone()));
+            }*/
+    Some(Directions::Seq(seq)) => {
+    for (i, e) in seq.iter().enumerate() {
+    match e {
+    Directions::Dir(dir) => {
+    current_branch.push(Directions::Dir(dir.clone()))
+    }
+    Directions::Choice(_) => {
+    // push choice index
+    let mut choice_idx = idx.clone();
+    choice_idx.push(i);
+    queue.push_back(choice_idx);
 
-                                break; // break because each new choice means a new iteration will take place
-                            }
-                            _ => panic!("seq of seqs"),
-                        }
-                    }
-                }
-                Some(Directions::Choice(choice)) => {
-                    //
+    break; // break because each new choice means a new iteration will take place
+    }
+    _ => panic!("seq of seqs"),
+    }
+    }
+    }
+    Some(Directions::Choice(choice)) => {
+    //
 
-                    for (i, e) in choice.iter().enumerate() {
+    for (i, e) in choice.iter().enumerate() {}
+    }
+    _ => panic!("should not point on a dir"),
+    }
+    }
 
-                    }
-                }
-                _ => panic!("should not point on a dir"),
-            }
-        }
-
-        Directions::Seq(tree)
+    Directions::Seq(tree)
     }*/
 
     fn nested_get(&self, idx: &[usize]) -> Option<&Directions> {
-        let d = self;
+        let mut d = self;
         for &i in idx {
-            let d = match d {
+            d = match d {
                 Directions::Seq(s) => s.get(i)?,
                 Directions::Choice(c) => c.get(i)?,
                 Directions::Dir(_) => d,

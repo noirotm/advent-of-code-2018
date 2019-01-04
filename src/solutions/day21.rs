@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
@@ -35,7 +35,7 @@ impl Solver for Day21 {
         0
     }
 
-    fn solve_second(input: &Program) -> u64 {
+    fn solve_second(_input: &Program) -> u64 {
         0
     }
 }

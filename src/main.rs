@@ -1,7 +1,3 @@
-extern crate chrono;
-extern crate regex;
-extern crate core;
-
 mod solutions;
 mod solver;
 

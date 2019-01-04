@@ -1,6 +1,6 @@
+use crate::solver::Solver;
 use chrono::prelude::*;
 use regex::Regex;
-use crate::solver::Solver;
 use std::collections::HashMap;
 use std::io;
 use std::io::BufRead;

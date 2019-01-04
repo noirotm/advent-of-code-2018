@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
@@ -35,7 +35,8 @@ impl Solver for Day10 {
                         },
                     })
                 })
-            }).collect()
+            })
+            .collect()
     }
 
     fn solve_first(input: &Vec<PointEntry>) -> String {
@@ -101,7 +102,8 @@ fn next_state(points: &Vec<PointEntry>) -> Vec<PointEntry> {
                 x: e.velocity.x,
                 y: e.velocity.y,
             },
-        }).collect()
+        })
+        .collect()
 }
 
 fn entropy(points: &Vec<PointEntry>) -> u64 {

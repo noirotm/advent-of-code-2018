@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::io;
@@ -84,7 +84,8 @@ impl Solver for Day16 {
                         c.get(4)?.as_str().parse().ok()?,
                     ))
                 })
-            }).collect();
+            })
+            .collect();
 
         Input { tests, program }
     }
@@ -217,7 +218,6 @@ enum Inst {
 
 struct Machine {
     registers: [u64; 4],
-
 }
 
 impl Machine {
@@ -317,11 +317,7 @@ impl Machine {
     }
 
     fn gtrr(&mut self, (_, r1, r2, r3): (u8, u8, u8, u8)) {
-        let val = if self.reg(r1) > self.reg(r2) {
-            1
-        } else {
-            0
-        };
+        let val = if self.reg(r1) > self.reg(r2) { 1 } else { 0 };
         self.set_reg(r3, val);
     }
 
@@ -336,11 +332,7 @@ impl Machine {
     }
 
     fn eqrr(&mut self, (_, r1, r2, r3): (u8, u8, u8, u8)) {
-        let val = if self.reg(r1) == self.reg(r2) {
-            1
-        } else {
-            0
-        };
+        let val = if self.reg(r1) == self.reg(r2) { 1 } else { 0 };
         self.set_reg(r3, val);
     }
 

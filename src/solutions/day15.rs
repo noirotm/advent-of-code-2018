@@ -306,7 +306,8 @@ impl Map {
 
                 if let Some(p) = closest_dest.clone() {
                     // keep the point that is the "smaller" in terms of order
-                    if costs[current_dest.y][current_dest.x] == costs[p.y][p.x] && current_dest < p{
+                    if costs[current_dest.y][current_dest.x] == costs[p.y][p.x] && current_dest < p
+                    {
                         closest_dest = Some(current_dest);
                     }
                 } else {

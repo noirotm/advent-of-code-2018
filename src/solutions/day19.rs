@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::io;
 use std::io::BufRead;
 use std::io::BufReader;

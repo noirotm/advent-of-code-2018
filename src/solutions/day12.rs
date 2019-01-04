@@ -40,7 +40,8 @@ impl Solver for Day12 {
                 let to = b[9];
 
                 Some((from, to))
-            }).collect();
+            })
+            .collect();
 
         LifeInput {
             state: State {

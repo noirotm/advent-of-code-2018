@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::io;

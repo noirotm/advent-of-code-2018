@@ -1,5 +1,5 @@
-use regex::Regex;
 use crate::solver::Solver;
+use regex::Regex;
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::fmt::Error;
@@ -84,10 +84,7 @@ impl Grid {
             .take(height)
             .collect();
 
-        Self {
-            cells,
-            bounds,
-        }
+        Self { cells, bounds }
     }
 
     fn set(&mut self, pt: &Pt, val: u8) {
