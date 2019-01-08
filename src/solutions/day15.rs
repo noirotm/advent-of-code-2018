@@ -15,15 +15,15 @@ impl Solver for Day15 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         15
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Map {
+    fn parse_input<R: io::Read>(&self, r: R) -> Map {
         Map::from_reader(r)
     }
 
-    fn solve_first(input: &Map) -> i64 {
+    fn solve_first(&self, input: &Map) -> i64 {
         let mut map = input.clone();
         loop {
             let status = map.round();
@@ -41,7 +41,7 @@ impl Solver for Day15 {
         }
     }
 
-    fn solve_second(input: &Map) -> i64 {
+    fn solve_second(&self, input: &Map) -> i64 {
         let mut elf_atk = 4;
         loop {
             let mut map = input.clone();

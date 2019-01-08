@@ -8,21 +8,21 @@ impl Solver for Day05 {
     type Output1 = usize;
     type Output2 = usize;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         5
     }
 
-    fn parse_input<R: io::Read>(mut r: R) -> Vec<u8> {
+    fn parse_input<R: io::Read>(&self, mut r: R) -> Vec<u8> {
         let mut v = vec![];
         r.read_to_end(&mut v).expect("unable to read to vec");
         v
     }
 
-    fn solve_first(input: &Vec<u8>) -> usize {
+    fn solve_first(&self, input: &Vec<u8>) -> usize {
         size(input)
     }
 
-    fn solve_second(input: &Vec<u8>) -> usize {
+    fn solve_second(&self, input: &Vec<u8>) -> usize {
         (b'a'..=b'z')
             .map(|c| {
                 let v = input

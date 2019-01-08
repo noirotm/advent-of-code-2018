@@ -13,11 +13,11 @@ impl Solver for Day03 {
     type Output1 = u64;
     type Output2 = u32;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         3
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<Rectangle> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<Rectangle> {
         let re = Regex::new(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)").expect("Invalid regex");
 
         BufReader::new(r)
@@ -37,7 +37,7 @@ impl Solver for Day03 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<Rectangle>) -> u64 {
+    fn solve_first(&self, input: &Vec<Rectangle>) -> u64 {
         let mut occupied_areas = HashMap::new();
         let mut sol_area = 0;
 
@@ -57,7 +57,7 @@ impl Solver for Day03 {
         sol_area
     }
 
-    fn solve_second(input: &Vec<Rectangle>) -> u32 {
+    fn solve_second(&self, input: &Vec<Rectangle>) -> u32 {
         let mut overlaps = HashSet::new();
 
         for r1 in input {

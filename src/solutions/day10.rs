@@ -11,11 +11,11 @@ impl Solver for Day10 {
     type Output1 = String;
     type Output2 = i32;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         10
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<PointEntry> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<PointEntry> {
         let re = Regex::new(r"position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>")
             .expect("bad regex");
 
@@ -39,7 +39,7 @@ impl Solver for Day10 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<PointEntry>) -> String {
+    fn solve_first(&self, input: &Vec<PointEntry>) -> String {
         let mut cur_state = next_state(input);
 
         loop {
@@ -57,7 +57,7 @@ impl Solver for Day10 {
         "See output".to_string()
     }
 
-    fn solve_second(input: &Vec<PointEntry>) -> i32 {
+    fn solve_second(&self, input: &Vec<PointEntry>) -> i32 {
         let mut cur_state = next_state(input);
         let mut time = 1;
 

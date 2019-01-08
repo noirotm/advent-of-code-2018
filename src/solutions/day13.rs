@@ -11,11 +11,11 @@ impl Solver for Day13 {
     type Output1 = String;
     type Output2 = String;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         13
     }
 
-    fn parse_input<R: io::Read>(r: R) -> RailSystem {
+    fn parse_input<R: io::Read>(&self, r: R) -> RailSystem {
         let mut tracks: Vec<Vec<u8>> = BufReader::new(r)
             .lines()
             .filter_map(|l| l.ok())
@@ -58,7 +58,7 @@ impl Solver for Day13 {
         RailSystem { tracks, carts }
     }
 
-    fn solve_first(input: &RailSystem) -> String {
+    fn solve_first(&self, input: &RailSystem) -> String {
         let mut sys = input.clone();
         loop {
             let collisions = sys.step();
@@ -68,7 +68,7 @@ impl Solver for Day13 {
         }
     }
 
-    fn solve_second(input: &RailSystem) -> String {
+    fn solve_second(&self, input: &RailSystem) -> String {
         let mut sys = input.clone();
         loop {
             let _ = sys.step();

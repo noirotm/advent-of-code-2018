@@ -11,11 +11,11 @@ impl Solver for Day01 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         1
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<i64> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<i64> {
         let r = BufReader::new(r);
         r.lines()
             .filter_map(|l| l.ok())
@@ -23,11 +23,11 @@ impl Solver for Day01 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<i64>) -> i64 {
+    fn solve_first(&self, input: &Vec<i64>) -> i64 {
         input.iter().sum()
     }
 
-    fn solve_second(input: &Vec<i64>) -> i64 {
+    fn solve_second(&self, input: &Vec<i64>) -> i64 {
         let mut frequencies = HashSet::new();
         let mut frequency = 0i64;
 

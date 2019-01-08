@@ -11,11 +11,11 @@ impl Solver for Day19 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         19
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Program {
+    fn parse_input<R: io::Read>(&self, r: R) -> Program {
         let mut lines = BufReader::new(r).lines();
 
         // parse first line
@@ -50,14 +50,14 @@ impl Solver for Day19 {
         }
     }
 
-    fn solve_first(input: &Program) -> u64 {
+    fn solve_first(&self, input: &Program) -> u64 {
         let mut vm = Machine::new();
         input.execute(&mut vm);
 
         vm.registers[0]
     }
 
-    fn solve_second(input: &Program) -> u64 {
+    fn solve_second(&self, input: &Program) -> u64 {
         let mut vm = Machine::new();
         vm.registers[0] = 1;
 

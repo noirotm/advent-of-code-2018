@@ -9,11 +9,11 @@ impl Solver for Day09 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         9
     }
 
-    fn parse_input<R: io::Read>(mut r: R) -> (usize, usize) {
+    fn parse_input<R: io::Read>(&self, mut r: R) -> (usize, usize) {
         let re =
             Regex::new(r"(\d+) players; last marble is worth (\d+) points").expect("bad regex");
         let mut s = String::new();
@@ -26,7 +26,7 @@ impl Solver for Day09 {
         (players, marbles)
     }
 
-    fn solve_first(&(num_players, num_marbles): &(usize, usize)) -> u64 {
+    fn solve_first(&self, &(num_players, num_marbles): &(usize, usize)) -> u64 {
         let mut players = vec![0u64; num_players];
         let mut circle = Circle::with_capacity(num_marbles + 1);
 
@@ -46,8 +46,8 @@ impl Solver for Day09 {
         *players.iter().max_by_key(|&&e| e).unwrap()
     }
 
-    fn solve_second(&(num_players, num_marbles): &(usize, usize)) -> u64 {
-        Self::solve_first(&(num_players, num_marbles * 100))
+    fn solve_second(&self, &(num_players, num_marbles): &(usize, usize)) -> u64 {
+        Self::solve_first(self, &(num_players, num_marbles * 100))
     }
 }
 

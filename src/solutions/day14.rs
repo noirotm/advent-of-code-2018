@@ -8,11 +8,11 @@ impl Solver for Day14 {
     type Output1 = String;
     type Output2 = usize;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         14
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<u8> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<u8> {
         r.bytes()
             .filter_map(|b| b.ok())
             .filter_map(|b| char::from(b).to_digit(10))
@@ -20,7 +20,7 @@ impl Solver for Day14 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<u8>) -> String {
+    fn solve_first(&self, input: &Vec<u8>) -> String {
         let n = recipes_str(input)
             .parse::<usize>()
             .expect("invalid integer");
@@ -53,7 +53,7 @@ impl Solver for Day14 {
         }
     }
 
-    fn solve_second(input: &Vec<u8>) -> usize {
+    fn solve_second(&self, input: &Vec<u8>) -> usize {
         let mut elves = [0usize, 1usize];
         let mut recipes = vec![3, 7];
 

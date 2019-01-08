@@ -17,11 +17,11 @@ impl Solver for Day07 {
     type Output1 = String;
     type Output2 = i32;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         7
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<(char, char)> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<(char, char)> {
         let re = Regex::new(r"(.) must be finished before step (.)").expect("Invalid regex");
 
         BufReader::new(r)
@@ -38,7 +38,7 @@ impl Solver for Day07 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<(char, char)>) -> String {
+    fn solve_first(&self, input: &Vec<(char, char)>) -> String {
         let mut dependencies = build_dependency_graph(input);
 
         let len = dependencies.len();
@@ -63,7 +63,7 @@ impl Solver for Day07 {
         result.iter().collect()
     }
 
-    fn solve_second(input: &Vec<(char, char)>) -> i32 {
+    fn solve_second(&self, input: &Vec<(char, char)>) -> i32 {
         let mut dependencies = build_dependency_graph(input);
 
         // create free workers

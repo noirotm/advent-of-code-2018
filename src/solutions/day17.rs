@@ -17,15 +17,15 @@ impl Solver for Day17 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         17
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<Pt> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<Pt> {
         coords_from_reader(r)
     }
 
-    fn solve_first(input: &Vec<Pt>) -> u64 {
+    fn solve_first(&self, input: &Vec<Pt>) -> u64 {
         let bounds = coords_bounds(&input).unwrap();
         let mut grid = Grid::with_bounds(bounds);
         setup_grid(&mut grid, &input);
@@ -47,7 +47,7 @@ impl Solver for Day17 {
             .sum()
     }
 
-    fn solve_second(input: &Vec<Pt>) -> u64 {
+    fn solve_second(&self, input: &Vec<Pt>) -> u64 {
         let bounds = coords_bounds(&input).unwrap();
         let mut grid = Grid::with_bounds(bounds);
         setup_grid(&mut grid, &input);

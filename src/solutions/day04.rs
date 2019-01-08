@@ -13,11 +13,11 @@ impl Solver for Day04 {
     type Output1 = u32;
     type Output2 = u32;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         4
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<GuardEvent> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<GuardEvent> {
         let date_re = Regex::new(r"\[(.+)]").expect("Invalid regex");
         let shift_re = Regex::new(r"Guard #(\d+) begins shift").expect("Invalid regex");
         let sleep_re = Regex::new(r"falls asleep").expect("Invalid regex");
@@ -45,7 +45,7 @@ impl Solver for Day04 {
         result
     }
 
-    fn solve_first(input: &Vec<GuardEvent>) -> u32 {
+    fn solve_first(&self, input: &Vec<GuardEvent>) -> u32 {
         let mut current_id = 0;
         let mut last_asleep = None;
         let mut asleep = HashMap::new();
@@ -98,7 +98,7 @@ impl Solver for Day04 {
         max_id * max.0
     }
 
-    fn solve_second(input: &Vec<GuardEvent>) -> u32 {
+    fn solve_second(&self, input: &Vec<GuardEvent>) -> u32 {
         let mut current_id = 0;
         let mut last_asleep = None;
         let mut minute_guards = HashMap::new();

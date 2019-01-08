@@ -19,15 +19,15 @@ impl Solver for Day18 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         18
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Grid {
+    fn parse_input<R: io::Read>(&self, r: R) -> Grid {
         Grid::from_reader(r)
     }
 
-    fn solve_first(input: &Grid) -> u64 {
+    fn solve_first(&self, input: &Grid) -> u64 {
         let mut g = input.clone();
 
         for _ in 0..10 {
@@ -51,7 +51,7 @@ impl Solver for Day18 {
         n_trees * n_lumbs
     }
 
-    fn solve_second(input: &Grid) -> u64 {
+    fn solve_second(&self, input: &Grid) -> u64 {
         let mut g = input.clone();
         let mut checksums = HashMap::new();
 

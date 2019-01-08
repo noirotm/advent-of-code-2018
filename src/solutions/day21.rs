@@ -11,15 +11,15 @@ impl Solver for Day21 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         21
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Program {
+    fn parse_input<R: io::Read>(&self, r: R) -> Program {
         Program::from_reader(r)
     }
 
-    fn solve_first(input: &Program) -> u64 {
+    fn solve_first(&self, input: &Program) -> u64 {
         for i in 1..60000000 {
             let mut vm = Machine::new();
             vm.registers[0] = i;
@@ -35,7 +35,7 @@ impl Solver for Day21 {
         0
     }
 
-    fn solve_second(_input: &Program) -> u64 {
+    fn solve_second(&self, _input: &Program) -> u64 {
         0
     }
 }

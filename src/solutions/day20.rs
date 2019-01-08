@@ -11,19 +11,19 @@ impl Solver for Day20 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         20
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Directions {
+    fn parse_input<R: io::Read>(&self, r: R) -> Directions {
         Directions::from_reader(r)
     }
 
-    fn solve_first(input: &Directions) -> u64 {
+    fn solve_first(&self, input: &Directions) -> u64 {
         input.max_len()
     }
 
-    fn solve_second(_input: &Directions) -> u64 {
+    fn solve_second(&self, _input: &Directions) -> u64 {
         //input.n_further_from(10)
         0
     }

@@ -19,21 +19,23 @@ pub trait Solver {
     type Output1: Display;
     type Output2: Display;
 
-    fn day() -> u32;
-    fn parse_input<R: io::Seek + io::Read>(r: R) -> Self::Input;
-    fn solve_first(input: &Self::Input) -> Self::Output1;
-    fn solve_second(input: &Self::Input) -> Self::Output2;
+    fn day(&self) -> u32;
+    fn parse_input<R: io::Seek + io::Read>(&self, r: R) -> Self::Input;
+    fn solve_first(&self, input: &Self::Input) -> Self::Output1;
+    fn solve_second(&self, input: &Self::Input) -> Self::Output2;
 
-    fn load_input<P: AsRef<Path>>(p: P) -> io::Result<Self::Input> {
+    fn load_input<P: AsRef<Path>>(&self, p: P) -> io::Result<Self::Input> {
         let f = File::open(p)?;
-        Ok(Self::parse_input(f))
+        Ok(self.parse_input(f))
     }
 
-    fn solve() {
-        let input_file = input_file(Self::day());
-        let input = Self::load_input(input_file).expect("unable to open input file");
-        let s1 = Self::solve_first(&input);
-        let s2 = Self::solve_second(&input);
+    fn solve(&self) {
+        let input_file = input_file(self.day());
+        let input = self
+            .load_input(input_file)
+            .expect("unable to open input file");
+        let s1 = self.solve_first(&input);
+        let s2 = self.solve_second(&input);
         println!("Solution 1: {}", s1);
         println!("Solution 2: {}", s2);
     }

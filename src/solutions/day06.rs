@@ -12,11 +12,11 @@ impl Solver for Day06 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         6
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<Pt> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<Pt> {
         let r = BufReader::new(r);
         r.lines()
             .filter_map(|l| l.ok())
@@ -29,7 +29,7 @@ impl Solver for Day06 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<Pt>) -> u64 {
+    fn solve_first(&self, input: &Vec<Pt>) -> u64 {
         let min_x = input.iter().min_by_key(|e| e.x).unwrap().x;
         let min_y = input.iter().min_by_key(|e| e.y).unwrap().y;
         let max_x = input.iter().max_by_key(|e| e.x).unwrap().x;
@@ -70,7 +70,7 @@ impl Solver for Day06 {
         *area as u64
     }
 
-    fn solve_second(input: &Vec<Pt>) -> u64 {
+    fn solve_second(&self, input: &Vec<Pt>) -> u64 {
         let min_x = input.iter().min_by_key(|e| e.x).unwrap().x;
         let min_y = input.iter().min_by_key(|e| e.y).unwrap().y;
         let max_x = input.iter().max_by_key(|e| e.x).unwrap().x;

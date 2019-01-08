@@ -13,11 +13,11 @@ impl Solver for Day12 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         12
     }
 
-    fn parse_input<R: io::Read + io::Seek>(r: R) -> LifeInput {
+    fn parse_input<R: io::Read + io::Seek>(&self, r: R) -> LifeInput {
         let mut r = BufReader::new(r);
 
         r.seek(SeekFrom::Current(15)).expect("unable to seek");
@@ -52,11 +52,11 @@ impl Solver for Day12 {
         }
     }
 
-    fn solve_first(input: &LifeInput) -> i64 {
+    fn solve_first(&self, input: &LifeInput) -> i64 {
         solve_for_generations(&input, 20)
     }
 
-    fn solve_second(_input: &LifeInput) -> i64 {
+    fn solve_second(&self, _input: &LifeInput) -> i64 {
         //solve_for_generations(&input, 50000000000)
         solve_for_last_gen()
     }

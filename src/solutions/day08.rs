@@ -10,11 +10,11 @@ impl Solver for Day08 {
     type Output1 = u32;
     type Output2 = u32;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         8
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<u32> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<u32> {
         let r = BufReader::new(r);
         r.split(b' ')
             .filter_map(|s| s.ok())
@@ -23,14 +23,14 @@ impl Solver for Day08 {
             .collect()
     }
 
-    fn solve_first(input: &Vec<u32>) -> u32 {
+    fn solve_first(&self, input: &Vec<u32>) -> u32 {
         let mut it = input.iter();
         let tree = parse_nodes(&mut it);
 
         tree.unwrap().meta_sum
     }
 
-    fn solve_second(input: &Vec<u32>) -> u32 {
+    fn solve_second(&self, input: &Vec<u32>) -> u32 {
         let mut it = input.iter();
         let tree = parse_nodes(&mut it);
 

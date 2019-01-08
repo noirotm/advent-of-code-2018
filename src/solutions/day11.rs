@@ -9,17 +9,17 @@ impl Solver for Day11 {
     type Output1 = String;
     type Output2 = String;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         11
     }
 
-    fn parse_input<R: io::Read>(mut r: R) -> i32 {
+    fn parse_input<R: io::Read>(&self, mut r: R) -> i32 {
         let mut s = String::new();
         r.read_to_string(&mut s).expect("unable to read to string");
         s.parse().unwrap()
     }
 
-    fn solve_first(input: &i32) -> String {
+    fn solve_first(&self, input: &i32) -> String {
         let powers = compute_all_powers(*input);
         let mut max_square: Option<SquarePower> = None;
 
@@ -55,7 +55,7 @@ impl Solver for Day11 {
         )
     }
 
-    fn solve_second(input: &i32) -> String {
+    fn solve_second(&self, input: &i32) -> String {
         let powers = compute_all_powers(*input);
         let mut max_square: Option<SquarePower> = None;
 

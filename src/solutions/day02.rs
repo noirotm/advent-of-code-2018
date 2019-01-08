@@ -9,15 +9,15 @@ impl Solver for Day02 {
     type Output1 = u64;
     type Output2 = String;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         2
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Vec<String> {
+    fn parse_input<R: io::Read>(&self, r: R) -> Vec<String> {
         read_to_vec(r)
     }
 
-    fn solve_first(input: &Vec<String>) -> u64 {
+    fn solve_first(&self, input: &Vec<String>) -> u64 {
         let mut two = 0;
         let mut three = 0;
 
@@ -34,7 +34,7 @@ impl Solver for Day02 {
         two * three
     }
 
-    fn solve_second(input: &Vec<String>) -> String {
+    fn solve_second(&self, input: &Vec<String>) -> String {
         // quadratic complexity :(
         for s1 in input {
             for s2 in input {

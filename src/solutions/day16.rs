@@ -13,11 +13,11 @@ impl Solver for Day16 {
     type Output1 = usize;
     type Output2 = u64;
 
-    fn day() -> u32 {
+    fn day(&self) -> u32 {
         16
     }
 
-    fn parse_input<R: io::Read>(r: R) -> Input {
+    fn parse_input<R: io::Read>(&self, r: R) -> Input {
         let mut lines = BufReader::new(r).lines().filter_map(|l| l.ok());
 
         let reg_re = Regex::new(r"(\d), (\d), (\d), (\d)").unwrap();
@@ -90,7 +90,7 @@ impl Solver for Day16 {
         Input { tests, program }
     }
 
-    fn solve_first(input: &Input) -> usize {
+    fn solve_first(&self, input: &Input) -> usize {
         let mut count = 0;
 
         for tc in input.tests.iter() {
@@ -110,7 +110,7 @@ impl Solver for Day16 {
         count
     }
 
-    fn solve_second(input: &Input) -> u64 {
+    fn solve_second(&self, input: &Input) -> u64 {
         let mappings = find_opcode_mapping(&input.tests);
         println!("{:#?}", mappings);
         println!("{:#?}", input.program);
