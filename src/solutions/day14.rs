@@ -8,10 +8,6 @@ impl Solver for Day14 {
     type Output1 = String;
     type Output2 = usize;
 
-    fn day(&self) -> u32 {
-        14
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<u8> {
         r.bytes()
             .filter_map(|b| b.ok())

@@ -11,10 +11,6 @@ impl Solver for Day20 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        20
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Directions {
         Directions::from_reader(r)
     }

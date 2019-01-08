@@ -17,10 +17,6 @@ impl Solver for Day07 {
     type Output1 = String;
     type Output2 = i32;
 
-    fn day(&self) -> u32 {
-        7
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<(char, char)> {
         let re = Regex::new(r"(.) must be finished before step (.)").expect("Invalid regex");
 

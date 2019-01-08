@@ -11,10 +11,6 @@ impl Solver for Day19 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        19
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Program {
         let mut lines = BufReader::new(r).lines();
 

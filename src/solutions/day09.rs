@@ -9,10 +9,6 @@ impl Solver for Day09 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        9
-    }
-
     fn parse_input<R: io::Read>(&self, mut r: R) -> (usize, usize) {
         let re =
             Regex::new(r"(\d+) players; last marble is worth (\d+) points").expect("bad regex");

@@ -9,10 +9,6 @@ impl Solver for Day11 {
     type Output1 = String;
     type Output2 = String;
 
-    fn day(&self) -> u32 {
-        11
-    }
-
     fn parse_input<R: io::Read>(&self, mut r: R) -> i32 {
         let mut s = String::new();
         r.read_to_string(&mut s).expect("unable to read to string");

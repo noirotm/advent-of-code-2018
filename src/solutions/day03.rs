@@ -13,10 +13,6 @@ impl Solver for Day03 {
     type Output1 = u64;
     type Output2 = u32;
 
-    fn day(&self) -> u32 {
-        3
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<Rectangle> {
         let re = Regex::new(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)").expect("Invalid regex");
 

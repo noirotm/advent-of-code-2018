@@ -15,10 +15,6 @@ impl Solver for Day15 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day(&self) -> u32 {
-        15
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Map {
         Map::from_reader(r)
     }

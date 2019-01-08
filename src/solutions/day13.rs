@@ -11,10 +11,6 @@ impl Solver for Day13 {
     type Output1 = String;
     type Output2 = String;
 
-    fn day(&self) -> u32 {
-        13
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> RailSystem {
         let mut tracks: Vec<Vec<u8>> = BufReader::new(r)
             .lines()

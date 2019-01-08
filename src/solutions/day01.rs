@@ -11,10 +11,6 @@ impl Solver for Day01 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day(&self) -> u32 {
-        1
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<i64> {
         let r = BufReader::new(r);
         r.lines()

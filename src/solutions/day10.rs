@@ -11,10 +11,6 @@ impl Solver for Day10 {
     type Output1 = String;
     type Output2 = i32;
 
-    fn day(&self) -> u32 {
-        10
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<PointEntry> {
         let re = Regex::new(r"position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>")
             .expect("bad regex");

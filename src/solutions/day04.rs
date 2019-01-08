@@ -13,10 +13,6 @@ impl Solver for Day04 {
     type Output1 = u32;
     type Output2 = u32;
 
-    fn day(&self) -> u32 {
-        4
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<GuardEvent> {
         let date_re = Regex::new(r"\[(.+)]").expect("Invalid regex");
         let shift_re = Regex::new(r"Guard #(\d+) begins shift").expect("Invalid regex");

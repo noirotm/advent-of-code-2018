@@ -9,10 +9,6 @@ impl Solver for Day02 {
     type Output1 = u64;
     type Output2 = String;
 
-    fn day(&self) -> u32 {
-        2
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<String> {
         read_to_vec(r)
     }

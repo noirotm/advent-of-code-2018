@@ -5,7 +5,7 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::path::Path;
 
-fn input_file(day: u32) -> String {
+fn input_file(day: &str) -> String {
     format!("input/day{:02}", day)
 }
 
@@ -19,7 +19,6 @@ pub trait Solver {
     type Output1: Display;
     type Output2: Display;
 
-    fn day(&self) -> u32;
     fn parse_input<R: io::Seek + io::Read>(&self, r: R) -> Self::Input;
     fn solve_first(&self, input: &Self::Input) -> Self::Output1;
     fn solve_second(&self, input: &Self::Input) -> Self::Output2;
@@ -29,8 +28,8 @@ pub trait Solver {
         Ok(self.parse_input(f))
     }
 
-    fn solve(&self) {
-        let input_file = input_file(self.day());
+    fn solve(&self, day: &str) {
+        let input_file = input_file(day);
         let input = self
             .load_input(input_file)
             .expect("unable to open input file");

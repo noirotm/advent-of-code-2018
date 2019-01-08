@@ -13,10 +13,6 @@ impl Solver for Day16 {
     type Output1 = usize;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        16
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Input {
         let mut lines = BufReader::new(r).lines().filter_map(|l| l.ok());
 

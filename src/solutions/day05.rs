@@ -8,10 +8,6 @@ impl Solver for Day05 {
     type Output1 = usize;
     type Output2 = usize;
 
-    fn day(&self) -> u32 {
-        5
-    }
-
     fn parse_input<R: io::Read>(&self, mut r: R) -> Vec<u8> {
         let mut v = vec![];
         r.read_to_end(&mut v).expect("unable to read to vec");

@@ -10,10 +10,6 @@ impl Solver for Day08 {
     type Output1 = u32;
     type Output2 = u32;
 
-    fn day(&self) -> u32 {
-        8
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<u32> {
         let r = BufReader::new(r);
         r.split(b' ')

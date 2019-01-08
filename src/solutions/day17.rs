@@ -17,10 +17,6 @@ impl Solver for Day17 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        17
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<Pt> {
         coords_from_reader(r)
     }

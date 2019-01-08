@@ -13,10 +13,6 @@ impl Solver for Day12 {
     type Output1 = i64;
     type Output2 = i64;
 
-    fn day(&self) -> u32 {
-        12
-    }
-
     fn parse_input<R: io::Read + io::Seek>(&self, r: R) -> LifeInput {
         let mut r = BufReader::new(r);
 

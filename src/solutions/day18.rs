@@ -19,10 +19,6 @@ impl Solver for Day18 {
     type Output1 = u64;
     type Output2 = u64;
 
-    fn day(&self) -> u32 {
-        18
-    }
-
     fn parse_input<R: io::Read>(&self, r: R) -> Grid {
         Grid::from_reader(r)
     }

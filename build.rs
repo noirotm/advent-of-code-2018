@@ -36,7 +36,7 @@ pub use self::day{0:02}::Day{0:02};", day)?;
     writeln!(f, "pub fn exec_day(day: &str) {{
     match day {{")?;
     for day in days {
-        writeln!(f, "        \"{0}\" => Day{0:02}{{}}.solve(),", day)?;
+        writeln!(f, "        \"{0}\" => Day{0:02}{{}}.solve(day),", day)?;
     }
     writeln!(
         f,
