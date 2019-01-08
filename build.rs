@@ -26,17 +26,14 @@ fn gen_solutions_mod<P: AsRef<Path>>(p: P, days: &Vec<u32>) -> io::Result<()> {
 
     writeln!(f, "use crate::solver::Solver;")?;
     writeln!(f)?;
-
     for day in days {
-        writeln!(f, "mod day{0:02};
-pub use self::day{0:02}::Day{0:02};", day)?;
-        writeln!(f)?;
+        writeln!(f, "mod day{0:02};", day)?;
     }
-
+    writeln!(f)?;
     writeln!(f, "pub fn exec_day(day: &str) {{
     match day {{")?;
     for day in days {
-        writeln!(f, "        \"{0}\" => Day{0:02}{{}}.solve(day),", day)?;
+        writeln!(f, "        \"{0}\" => day{0:02}::Day{0:02}{{}}.solve(day),", day)?;
     }
     writeln!(
         f,
