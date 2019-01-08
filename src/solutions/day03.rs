@@ -6,9 +6,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day03;
+pub struct Problem;
 
-impl Solver for Day03 {
+impl Solver for Problem {
     type Input = Vec<Rectangle>;
     type Output1 = u64;
     type Output2 = u32;

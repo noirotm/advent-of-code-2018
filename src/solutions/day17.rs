@@ -10,9 +10,9 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::iter::repeat;
 
-pub struct Day17;
+pub struct Problem;
 
-impl Solver for Day17 {
+impl Solver for Problem {
     type Input = Vec<Pt>;
     type Output1 = u64;
     type Output2 = u64;

@@ -4,9 +4,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day19;
+pub struct Problem;
 
-impl Solver for Day19 {
+impl Solver for Problem {
     type Input = Program;
     type Output1 = u64;
     type Output2 = u64;

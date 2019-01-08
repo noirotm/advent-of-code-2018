@@ -1,9 +1,9 @@
 use crate::solver::Solver;
 use std::io;
 
-pub struct Day05;
+pub struct Problem;
 
-impl Solver for Day05 {
+impl Solver for Problem {
     type Input = Vec<u8>;
     type Output1 = usize;
     type Output2 = usize;

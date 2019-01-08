@@ -2,9 +2,9 @@ use crate::solver::read_to_vec;
 use crate::solver::Solver;
 use std::io;
 
-pub struct Day02;
+pub struct Problem;
 
-impl Solver for Day02 {
+impl Solver for Problem {
     type Input = Vec<String>;
     type Output1 = u64;
     type Output2 = String;

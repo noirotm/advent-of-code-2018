@@ -65,7 +65,7 @@ fn gen_solutions_mod<P: AsRef<Path>>(p: P, days: &Vec<u32>) -> io::Result<()> {
     for day in days {
         writeln!(
             f,
-            "        {0} => day{0:02}::Day{0:02} {{}}.solve(day),",
+            "        {0} => day{0:02}::Problem {{}}.solve(day),",
             day
         )?;
     }

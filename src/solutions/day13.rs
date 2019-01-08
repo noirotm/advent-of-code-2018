@@ -4,9 +4,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day13;
+pub struct Problem;
 
-impl Solver for Day13 {
+impl Solver for Problem {
     type Input = RailSystem;
     type Output1 = String;
     type Output2 = String;

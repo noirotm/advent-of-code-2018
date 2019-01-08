@@ -3,9 +3,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day08;
+pub struct Problem;
 
-impl Solver for Day08 {
+impl Solver for Problem {
     type Input = Vec<u32>;
     type Output1 = u32;
     type Output2 = u32;

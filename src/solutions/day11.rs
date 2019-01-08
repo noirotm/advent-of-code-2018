@@ -2,9 +2,9 @@ use crate::solver::Solver;
 use std::cmp::min;
 use std::io;
 
-pub struct Day11;
+pub struct Problem;
 
-impl Solver for Day11 {
+impl Solver for Problem {
     type Input = i32;
     type Output1 = String;
     type Output2 = String;

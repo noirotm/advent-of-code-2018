@@ -6,9 +6,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day04;
+pub struct Problem;
 
-impl Solver for Day04 {
+impl Solver for Problem {
     type Input = Vec<GuardEvent>;
     type Output1 = u32;
     type Output2 = u32;

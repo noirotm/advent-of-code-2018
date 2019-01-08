@@ -6,9 +6,9 @@ use std::io::BufReader;
 use std::io::Seek;
 use std::io::SeekFrom;
 
-pub struct Day12;
+pub struct Problem;
 
-impl Solver for Day12 {
+impl Solver for Problem {
     type Input = LifeInput;
     type Output1 = i64;
     type Output2 = i64;

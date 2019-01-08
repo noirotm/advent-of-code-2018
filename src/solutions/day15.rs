@@ -8,9 +8,9 @@ use std::io::BufReader;
 use std::iter::repeat;
 use std::usize::MAX;
 
-pub struct Day15;
+pub struct Problem;
 
-impl Solver for Day15 {
+impl Solver for Problem {
     type Input = Map;
     type Output1 = i64;
     type Output2 = i64;

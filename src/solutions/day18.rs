@@ -12,9 +12,9 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::iter::repeat;
 
-pub struct Day18;
+pub struct Problem;
 
-impl Solver for Day18 {
+impl Solver for Problem {
     type Input = Grid;
     type Output1 = u64;
     type Output2 = u64;

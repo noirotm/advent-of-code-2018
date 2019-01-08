@@ -7,12 +7,12 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::iter::repeat_with;
 
-pub struct Day07;
+pub struct Problem;
 
 const WORKERS: usize = 5;
 const TASK_DURATION: u8 = 60;
 
-impl Solver for Day07 {
+impl Solver for Problem {
     type Input = Vec<(char, char)>;
     type Output1 = String;
     type Output2 = i32;

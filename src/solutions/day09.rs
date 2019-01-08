@@ -2,9 +2,9 @@ use crate::solver::Solver;
 use regex::Regex;
 use std::io;
 
-pub struct Day09;
+pub struct Problem;
 
-impl Solver for Day09 {
+impl Solver for Problem {
     type Input = (usize, usize);
     type Output1 = u64;
     type Output2 = u64;

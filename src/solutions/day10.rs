@@ -4,9 +4,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day10;
+pub struct Problem;
 
-impl Solver for Day10 {
+impl Solver for Problem {
     type Input = Vec<PointEntry>;
     type Output1 = String;
     type Output2 = i32;

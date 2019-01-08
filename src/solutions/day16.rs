@@ -6,9 +6,9 @@ use std::io;
 use std::io::BufRead;
 use std::io::BufReader;
 
-pub struct Day16;
+pub struct Problem;
 
-impl Solver for Day16 {
+impl Solver for Problem {
     type Input = Input;
     type Output1 = usize;
     type Output2 = u64;
