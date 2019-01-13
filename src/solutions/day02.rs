@@ -14,20 +14,13 @@ impl Solver for Problem {
     }
 
     fn solve_first(&self, input: &Vec<String>) -> u64 {
-        let mut two = 0;
-        let mut three = 0;
+        let (s2, s3) = input
+            .iter()
+            .map(|s| has_letters(s.as_str()))
+            .map(|(h1, h2)| (h1 as u64, h2 as u64))
+            .fold((0u64, 0u64), |(h2, h3), (a, b)| (h2 + a, h3 + b));
 
-        for id in input {
-            let (has_two, has_three) = has_letters(id.as_str());
-            if has_two {
-                two += 1;
-            }
-            if has_three {
-                three += 1;
-            }
-        }
-
-        two * three
+        s2 * s3
     }
 
     fn solve_second(&self, input: &Vec<String>) -> String {
@@ -51,18 +44,10 @@ fn has_letters(s: &str) -> (bool, bool) {
         occurences[idx as usize] += 1;
     }
 
-    let mut has_two = false;
-    let mut has_three = false;
-    for o in occurences.iter() {
-        if o == &2 {
-            has_two = true;
-        }
-        if o == &3 {
-            has_three = true;
-        }
-    }
-
-    (has_two, has_three)
+    occurences
+        .iter()
+        .map(|&o| (o == 2, o == 3))
+        .fold((false, false), |(h2, h3), (a, b)| (h2 || a, h3 || b))
 }
 
 fn common_letters(s1: &str, s2: &str) -> Option<String> {
