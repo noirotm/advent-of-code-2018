@@ -71,9 +71,7 @@ impl Solver for Problem {
                     }
 
                     let minutes_range = last_asleep.unwrap().minute()..evt.date.minute();
-                    if !guard_minutes.contains_key(&current_id) {
-                        guard_minutes.insert(current_id, HashMap::new());
-                    }
+                    guard_minutes.entry(current_id).or_insert_with(HashMap::new);
                     let map = guard_minutes.get_mut(&current_id).unwrap();
 
                     for i in minutes_range {
@@ -111,10 +109,8 @@ impl Solver for Problem {
                     let minutes_range = last_asleep.unwrap().minute()..evt.date.minute();
 
                     for i in minutes_range {
-                        if !minute_guards.contains_key(&i) {
-                            minute_guards.insert(i, HashMap::new());
-                        }
-                        let mut map = minute_guards.get_mut(&i).unwrap();
+                        minute_guards.entry(i).or_insert_with(HashMap::new);
+                        let map = minute_guards.get_mut(&i).unwrap();
 
                         let n = map.get(&current_id).unwrap_or(&0) + 1;
                         map.insert(current_id, n);

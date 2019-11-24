@@ -1,5 +1,5 @@
 use crate::solver::Solver;
-use std::collections::VecDeque;
+//use std::collections::VecDeque;
 use std::io;
 use std::io::BufReader;
 use std::io::Read;
@@ -89,6 +89,7 @@ impl Directions {
     Directions::Seq(tree)
     }*/
 
+    #[allow(dead_code)]
     fn nested_get(&self, idx: &[usize]) -> Option<&Directions> {
         let mut d = self;
         for &i in idx {
