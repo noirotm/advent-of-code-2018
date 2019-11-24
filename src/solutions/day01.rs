@@ -1,8 +1,8 @@
 use crate::solver::Solver;
-use std::collections::HashSet;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::{
+    collections::HashSet,
+    io::{self, BufRead, BufReader},
+};
 
 pub struct Problem;
 
@@ -13,10 +13,7 @@ impl Solver for Problem {
 
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<i64> {
         let r = BufReader::new(r);
-        r.lines()
-            .flatten()
-            .flat_map(|l| l.parse())
-            .collect()
+        r.lines().flatten().flat_map(|l| l.parse()).collect()
     }
 
     fn solve_first(&self, input: &Vec<i64>) -> i64 {

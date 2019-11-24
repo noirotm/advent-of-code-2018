@@ -1,12 +1,11 @@
 use crate::solver::Solver;
-use std::cmp::Ordering;
-use std::collections::BTreeSet;
-use std::collections::VecDeque;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::iter::repeat;
-use std::usize::MAX;
+use std::{
+    cmp::Ordering,
+    collections::{BTreeSet, VecDeque},
+    io::{self, BufRead, BufReader},
+    iter::repeat,
+    usize::MAX,
+};
 
 pub struct Problem;
 
@@ -255,7 +254,7 @@ impl Map {
         }
     }
 
-    fn mv(&mut self, unit: &UnitPos, enemies: &Vec<UnitPos>) -> Pos {
+    fn mv(&mut self, unit: &UnitPos, enemies: &[UnitPos]) -> Pos {
         // find all open squares in range
         let open_squares = self.find_open_squares(&enemies);
 
@@ -267,10 +266,10 @@ impl Map {
         // find the way to get there, go Dijkstra
         let path = self.find_path(&unit.pos, &open_squares);
 
-        path.unwrap_or(unit.pos.clone())
+        path.unwrap_or_else(|| unit.pos.clone())
     }
 
-    fn find_path(&self, start: &Pos, destinations: &Vec<Pos>) -> Option<Pos> {
+    fn find_path(&self, start: &Pos, destinations: &[Pos]) -> Option<Pos> {
         // create map copy for storing costs
         let mut costs = repeat(repeat(MAX).take(self.dims.0).collect::<Vec<_>>())
             .take(self.dims.1)
@@ -335,7 +334,7 @@ impl Map {
         Some(pos)
     }
 
-    fn find_open_squares(&self, enemies: &Vec<UnitPos>) -> Vec<Pos> {
+    fn find_open_squares(&self, enemies: &[UnitPos]) -> Vec<Pos> {
         let mut squares = vec![];
 
         for enemy in enemies.iter() {
@@ -444,7 +443,7 @@ impl Elem {
 
     fn unit(&self) -> Option<Unit> {
         match self {
-            Elem::Unit(u) => Some(u.clone()),
+            Elem::Unit(u) => Some(*u),
             _ => None,
         }
     }
@@ -474,7 +473,7 @@ pub enum UnitType {
 }
 
 impl UnitType {
-    fn enemy(&self) -> UnitType {
+    fn enemy(self) -> UnitType {
         match self {
             UnitType::Elf => UnitType::Goblin,
             UnitType::Goblin => UnitType::Elf,

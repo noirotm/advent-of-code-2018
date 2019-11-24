@@ -1,6 +1,5 @@
 use crate::solver::Solver;
-use std::cmp::min;
-use std::io;
+use std::{cmp::min, io};
 
 pub struct Problem;
 
@@ -34,10 +33,7 @@ impl Solver for Problem {
                     size: 3,
                     power: sum,
                 };
-                let max_pow = max_square
-                    .as_ref()
-                    .and_then(|sp| Some(sp.power))
-                    .unwrap_or(0);
+                let max_pow = max_square.as_ref().map(|sp| sp.power).unwrap_or(0);
                 if max_pow < sum {
                     max_square = Some(current_square);
                 }
@@ -129,7 +125,7 @@ fn compute_all_powers(serial_number: i32) -> Vec<i32> {
 }
 
 #[inline]
-fn get_power(powers: &Vec<i32>, pt: &Pt) -> i32 {
+fn get_power(powers: &[i32], pt: &Pt) -> i32 {
     let i = (pt.x - 1) + (pt.y - 1) * 300;
     *powers.get(i as usize).unwrap_or(&0)
 }

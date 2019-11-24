@@ -1,14 +1,11 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::collections::VecDeque;
-use std::fmt::Debug;
-use std::fmt::Error;
-use std::fmt::Formatter;
-use std::fmt::Write;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::iter::repeat;
+use std::{
+    collections::VecDeque,
+    fmt::{Debug, Error, Formatter, Write},
+    io::{self, BufRead, BufReader},
+    iter::repeat,
+};
 
 pub struct Problem;
 
@@ -84,12 +81,12 @@ impl Grid {
     }
 
     fn set(&mut self, pt: &Pt, val: u8) {
-        let x = pt.x.checked_sub(self.bounds.min_x).unwrap_or(0);
+        let x = pt.x.saturating_sub(self.bounds.min_x);
         self.cells[pt.y][x] = val;
     }
 
     fn get(&self, pt: &Pt) -> u8 {
-        let x = pt.x.checked_sub(self.bounds.min_x).unwrap_or(0);
+        let x = pt.x.saturating_sub(self.bounds.min_x);
         self.cells[pt.y][x]
     }
 }
@@ -106,7 +103,7 @@ impl Debug for Grid {
     }
 }
 
-fn setup_grid(grid: &mut Grid, coords: &Vec<Pt>) {
+fn setup_grid(grid: &mut Grid, coords: &[Pt]) {
     for p in coords {
         grid.set(p, b'#');
     }
@@ -201,7 +198,7 @@ impl<'a> GridFiller<'a> {
         match (border_left, border_right) {
             (Some(left), Some(right)) => {
                 // make water still
-                for x in left.x + 1..=right.x - 1 {
+                for x in left.x + 1..right.x {
                     let pt = Pt { x, y: left.y };
                     self.grid.set(&pt, b'~');
                 }
@@ -272,12 +269,12 @@ fn points_from_line(line: &str, (re_x, re_y): (&Regex, &Regex)) -> Option<Vec<Pt
         let x = caps.get(1)?.as_str().parse::<usize>().ok()?;
         let y1 = caps.get(2)?.as_str().parse::<usize>().ok()?;
         let y2 = caps.get(3)?.as_str().parse::<usize>().ok()?;
-        Some((y1..=y2).into_iter().map(|y| Pt { x, y }).collect())
+        Some((y1..=y2).map(|y| Pt { x, y }).collect())
     } else if let Some(caps) = re_y.captures(line) {
         let y = caps.get(1)?.as_str().parse::<usize>().ok()?;
         let x1 = caps.get(2)?.as_str().parse::<usize>().ok()?;
         let x2 = caps.get(3)?.as_str().parse::<usize>().ok()?;
-        Some((x1..=x2).into_iter().map(|x| Pt { x, y }).collect())
+        Some((x1..=x2).map(|x| Pt { x, y }).collect())
     } else {
         None
     }
@@ -294,7 +291,7 @@ fn coords_from_reader<R: io::Read>(r: R) -> Vec<Pt> {
         .collect()
 }
 
-fn coords_bounds(coords: &Vec<Pt>) -> Option<Bounds> {
+fn coords_bounds(coords: &[Pt]) -> Option<Bounds> {
     Some(Bounds {
         min_x: coords.iter().map(|p| p.x).min()? - 1,
         min_y: coords.iter().map(|p| p.y).min()?,

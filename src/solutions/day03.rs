@@ -1,10 +1,9 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::collections::HashMap;
-use std::collections::HashSet;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::{
+    collections::{HashMap, HashSet},
+    io::{self, BufRead, BufReader},
+};
 
 pub struct Problem;
 

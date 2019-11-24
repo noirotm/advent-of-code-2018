@@ -24,7 +24,7 @@ impl Solver for Problem {
                 let v = input
                     .iter()
                     .filter(|&&ch| ch != c && ch != c.to_ascii_uppercase())
-                    .map(|b| *b)
+                    .copied()
                     .collect::<Vec<_>>();
                 size(&v)
             })

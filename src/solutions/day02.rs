@@ -1,5 +1,4 @@
-use crate::solver::read_to_vec;
-use crate::solver::Solver;
+use crate::{solver::read_to_vec, solver::Solver};
 use std::io;
 
 pub struct Problem;

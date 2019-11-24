@@ -1,10 +1,9 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::collections::HashMap;
-use std::collections::HashSet;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::{
+    collections::{HashMap, HashSet},
+    io::{self, BufRead, BufReader},
+};
 
 pub struct Problem;
 
@@ -117,7 +116,7 @@ impl Solver for Problem {
     }
 }
 
-fn find_opcode_mapping(tests: &Vec<TestCase>) -> HashMap<u8, Inst> {
+fn find_opcode_mapping(tests: &[TestCase]) -> HashMap<u8, Inst> {
     let mut possible_matches = vec![HashSet::<Inst>::new(); 16];
 
     for tc in tests.iter() {
@@ -125,7 +124,7 @@ fn find_opcode_mapping(tests: &Vec<TestCase>) -> HashMap<u8, Inst> {
         let matches = results
             .iter()
             .filter(|&&(_, r)| r == tc.after)
-            .map(|(i, _)| i.clone())
+            .map(|(i, _)| *i)
             .collect::<HashSet<_>>();
 
         //println!("{} => {:#?}", tc.opcode.0, matches);
@@ -159,7 +158,7 @@ fn find_opcode_mapping(tests: &Vec<TestCase>) -> HashMap<u8, Inst> {
                 .find(|(_, m)| m.len() == 1)
                 .expect("unsolvable");
 
-            (instr as u8, opcodes.iter().next().unwrap().clone())
+            (instr as u8, *opcodes.iter().next().unwrap())
         };
 
         mappings.insert(instr, opcode);

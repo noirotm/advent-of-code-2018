@@ -1,10 +1,10 @@
 use crate::solver::Solver;
 use chrono::prelude::*;
 use regex::Regex;
-use std::collections::HashMap;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::{
+    collections::HashMap,
+    io::{self, BufRead, BufReader},
+};
 
 pub struct Problem;
 

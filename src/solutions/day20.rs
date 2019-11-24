@@ -1,8 +1,5 @@
 use crate::solver::Solver;
-//use std::collections::VecDeque;
-use std::io;
-use std::io::BufReader;
-use std::io::Read;
+use std::io::{self, BufReader, Read};
 
 pub struct Problem;
 
@@ -138,19 +135,19 @@ impl Directions {
         }
     }
 
-    fn seq_max_len(seq: &Vec<Directions>) -> u64 {
+    fn seq_max_len(seq: &[Directions]) -> u64 {
         if Self::is_detour(seq) {
             return 0;
         }
         seq.iter().map(|d| d.max_len()).sum()
     }
 
-    fn choice_max_len(choice: &Vec<Directions>) -> u64 {
+    fn choice_max_len(choice: &[Directions]) -> u64 {
         choice.iter().map(|d| d.max_len()).max().unwrap_or(0)
     }
 
     // if a sequence goes back to its origin, it is a detour
-    fn is_detour(seq: &Vec<Directions>) -> bool {
+    fn is_detour(seq: &[Directions]) -> bool {
         let sum = seq
             .iter()
             .filter_map(|d| match d {

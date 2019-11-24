@@ -1,11 +1,10 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::collections::HashMap;
-use std::collections::HashSet;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::iter::repeat_with;
+use std::{
+    collections::{HashMap, HashSet},
+    io::{self, BufRead, BufReader},
+    iter::repeat_with,
+};
 
 pub struct Problem;
 
@@ -119,7 +118,7 @@ impl Solver for Problem {
     }
 }
 
-fn build_dependency_graph(input: &Vec<(char, char)>) -> HashMap<char, HashSet<char>> {
+fn build_dependency_graph(input: &[(char, char)]) -> HashMap<char, HashSet<char>> {
     let mut dependencies = HashMap::new();
 
     // build dependency graph

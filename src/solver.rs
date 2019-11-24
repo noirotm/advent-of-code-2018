@@ -1,9 +1,9 @@
-use std::fmt::Display;
-use std::fs::File;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::path::Path;
+use std::{
+    fmt::Display,
+    fs::File,
+    io::{self, BufRead, BufReader},
+    path::Path,
+};
 
 fn input_file(day: i32) -> String {
     format!("input/day{:02}", day)

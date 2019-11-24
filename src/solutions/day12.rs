@@ -1,10 +1,8 @@
 use crate::solver::Solver;
-use std::collections::HashMap;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::io::Seek;
-use std::io::SeekFrom;
+use std::{
+    collections::HashMap,
+    io::{self, BufRead, BufReader, Seek, SeekFrom},
+};
 
 pub struct Problem;
 
@@ -30,12 +28,12 @@ impl Solver for Problem {
         let map = r
             .lines()
             .filter_map(|s| s.ok())
-            .filter_map(|s| {
+            .map(|s| {
                 let b = s.as_bytes();
                 let from = Vec::from(&b[0..5]);
                 let to = b[9];
 
-                Some((from, to))
+                (from, to)
             })
             .collect();
 

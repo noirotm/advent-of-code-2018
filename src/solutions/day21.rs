@@ -1,8 +1,6 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::io::{self, BufRead, BufReader};
 
 pub struct Problem;
 
@@ -16,7 +14,7 @@ impl Solver for Problem {
     }
 
     fn solve_first(&self, input: &Program) -> u64 {
-        for i in 1..60000000 {
+        for i in 1..60_000_000 {
             let mut vm = Machine::new();
             vm.registers[0] = i;
 
@@ -133,38 +131,35 @@ impl Program {
     fn execute_with_ip(&self, vm: &mut Machine, ip: usize) -> u64 {
         let mut n_exec = 0;
         let mut ip = ip;
-        loop {
-            // fetch instruction
-            if let Some(inst) = self.instructions.get(ip as usize) {
-                // prepare ip register
-                vm.registers[self.ip_register] = ip as u64;
 
-                /*print!(
-                    "ip={} {:?} {:?} {} {} {} ",
-                    ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
-                );*/
+        // fetch instruction
+        while let Some(inst) = self.instructions.get(ip as usize) {
+            // prepare ip register
+            vm.registers[self.ip_register] = ip as u64;
 
-                // exec
-                vm.exec(inst);
+            /*print!(
+                "ip={} {:?} {:?} {} {} {} ",
+                ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
+            );*/
 
-                //println!("{:?}", vm.registers);
+            // exec
+            vm.exec(inst);
 
-                // restore ip
-                ip = vm.registers[self.ip_register] as usize;
+            //println!("{:?}", vm.registers);
 
-                // increment for next instruction
-                ip += 1;
-                n_exec += 1;
+            // restore ip
+            ip = vm.registers[self.ip_register] as usize;
 
-                // security
-                if n_exec >= 12000 {
-                    break;
-                }
+            // increment for next instruction
+            ip += 1;
+            n_exec += 1;
 
-            //let _ = io::stdin().read(&mut [0u8]).unwrap();
-            } else {
+            // security
+            if n_exec >= 12000 {
                 break;
             }
+
+            //let _ = io::stdin().read(&mut [0u8]).unwrap();
         }
 
         n_exec

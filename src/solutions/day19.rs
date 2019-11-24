@@ -1,8 +1,6 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::io::{self, BufRead, BufReader};
 
 pub struct Problem;
 
@@ -105,7 +103,7 @@ fn quick_solve(vm: &mut Machine) {
     }*/
 
     if vm.registers[5] % vm.registers[3] == 0 {
-        vm.registers[0] = vm.registers[3] + vm.registers[0];
+        vm.registers[0] += vm.registers[3];
     }
     vm.registers[1] = vm.registers[5] + 1;
     vm.registers[2] = 1;
@@ -169,67 +167,60 @@ pub struct Program {
 impl Program {
     fn execute(&self, vm: &mut Machine) {
         let mut ip = 0;
-        loop {
-            // fetch instruction
-            if let Some(inst) = self.instructions.get(ip as usize) {
-                // prepare ip register
-                vm.registers[self.ip_register] = ip as u64;
+        // fetch instruction
+        while let Some(inst) = self.instructions.get(ip as usize) {
+            // prepare ip register
+            vm.registers[self.ip_register] = ip as u64;
 
-                /*print!(
-                    "ip={} {:?} {:?} {} {} {} ",
-                    ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
-                );*/
+            /*print!(
+                "ip={} {:?} {:?} {} {} {} ",
+                ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
+            );*/
 
-                // exec
-                vm.exec(inst);
+            // exec
+            vm.exec(inst);
 
-                //println!("{:?}", vm.registers);
+            //println!("{:?}", vm.registers);
 
-                // restore ip
-                ip = vm.registers[self.ip_register] as usize;
+            // restore ip
+            ip = vm.registers[self.ip_register] as usize;
 
-                // increment for next instruction
-                ip += 1;
+            // increment for next instruction
+            ip += 1;
 
             //let _ = io::stdin().read(&mut [0u8]).unwrap();
-            } else {
-                break;
-            }
         }
     }
 
     fn execute_with_ip(&self, vm: &mut Machine, ip: usize) {
         let mut ip = ip;
-        loop {
-            // fetch instruction
-            if let Some(inst) = self.instructions.get(ip as usize) {
-                // prepare ip register
-                vm.registers[self.ip_register] = ip as u64;
 
-                /*print!(
-                    "ip={} {:?} {:?} {} {} {} ",
-                    ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
-                );*/
+        // fetch instruction
+        while let Some(inst) = self.instructions.get(ip as usize) {
+            // prepare ip register
+            vm.registers[self.ip_register] = ip as u64;
 
-                // exec
-                if ip == 3 {
-                    quick_solve(vm);
-                } else {
-                    vm.exec(inst);
-                }
+            /*print!(
+                "ip={} {:?} {:?} {} {} {} ",
+                ip, vm.registers, inst.opcode, inst.args[0], inst.args[1], inst.args[2]
+            );*/
 
-                //println!("{:?}", vm.registers);
+            // exec
+            if ip == 3 {
+                quick_solve(vm);
+            } else {
+                vm.exec(inst);
+            }
 
-                // restore ip
-                ip = vm.registers[self.ip_register] as usize;
+            //println!("{:?}", vm.registers);
 
-                // increment for next instruction
-                ip += 1;
+            // restore ip
+            ip = vm.registers[self.ip_register] as usize;
+
+            // increment for next instruction
+            ip += 1;
 
             //let _ = io::stdin().read(&mut [0u8]).unwrap();
-            } else {
-                break;
-            }
         }
     }
 }

@@ -1,16 +1,11 @@
 use crate::solver::Solver;
-use std::collections::hash_map::DefaultHasher;
-use std::collections::HashMap;
-use std::fmt::Debug;
-use std::fmt::Error;
-use std::fmt::Formatter;
-use std::fmt::Write;
-use std::hash::Hash;
-use std::hash::Hasher;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
-use std::iter::repeat;
+use std::{
+    collections::{hash_map::DefaultHasher, HashMap},
+    fmt::{Debug, Error, Formatter, Write},
+    hash::{Hash, Hasher},
+    io::{self, BufRead, BufReader},
+    iter::repeat,
+};
 
 pub struct Problem;
 
@@ -54,7 +49,7 @@ impl Solver for Problem {
         // find the first pattern that gets repeated, and the repetition period
         let mut period = 0;
         let mut first_repeat_minute = 0;
-        for minute in 1..=1000000000 {
+        for minute in 1..=1_000_000_000 {
             g = g.next_minute();
             //println!("{:?}", g);
 
@@ -77,9 +72,9 @@ impl Solver for Problem {
         }
 
         // warp to the last minute before 1000000000 that has this pattern
-        let cycles = (1000000000 - first_repeat_minute) / period;
+        let cycles = (1_000_000_000 - first_repeat_minute) / period;
         let warp_to = first_repeat_minute + period * cycles;
-        for _minute in warp_to + 1..=1000000000 {
+        for _minute in warp_to + 1..=1_000_000_000 {
             g = g.next_minute();
         }
 

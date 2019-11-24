@@ -26,10 +26,7 @@ impl Solver for Problem {
         let mut players = vec![0u64; num_players];
         let mut circle = Circle::with_capacity(num_marbles + 1);
 
-        for (marble, player) in (1..=num_marbles)
-            .into_iter()
-            .zip((0..num_players).into_iter().cycle())
-        {
+        for (marble, player) in (1..=num_marbles).zip((0..num_players).into_iter().cycle()) {
             if marble % 23 == 0 {
                 let val = circle.remove();
                 let score = players.get_mut(player).unwrap();

@@ -1,7 +1,5 @@
 use crate::solver::Solver;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::io::{self, BufRead, BufReader};
 
 pub struct Problem;
 

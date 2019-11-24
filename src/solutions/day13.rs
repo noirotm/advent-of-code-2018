@@ -1,8 +1,8 @@
 use crate::solver::Solver;
-use std::cmp::Ordering;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::{
+    cmp::Ordering,
+    io::{self, BufRead, BufReader},
+};
 
 pub struct Problem;
 
@@ -171,11 +171,7 @@ impl RailSystem {
             carts[i] = cart;
         }
 
-        self.carts = carts
-            .iter()
-            .filter(|c| c.deleted == false)
-            .map(|c| c.clone())
-            .collect();
+        self.carts = carts.iter().filter(|c| !c.deleted).cloned().collect();
 
         // self.debug();
         deleted_pos

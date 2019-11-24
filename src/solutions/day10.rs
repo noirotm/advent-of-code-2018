@@ -1,8 +1,6 @@
 use crate::solver::Solver;
 use regex::Regex;
-use std::io;
-use std::io::BufRead;
-use std::io::BufReader;
+use std::io::{self, BufRead, BufReader};
 
 pub struct Problem;
 
@@ -86,7 +84,7 @@ pub struct Coords {
     y: i32,
 }
 
-fn next_state(points: &Vec<PointEntry>) -> Vec<PointEntry> {
+fn next_state(points: &[PointEntry]) -> Vec<PointEntry> {
     points
         .iter()
         .map(|e| PointEntry {
@@ -102,7 +100,7 @@ fn next_state(points: &Vec<PointEntry>) -> Vec<PointEntry> {
         .collect()
 }
 
-fn entropy(points: &Vec<PointEntry>) -> u64 {
+fn entropy(points: &[PointEntry]) -> u64 {
     let mut v = points.iter().map(|p| p.pos.x).collect::<Vec<_>>();
     v.sort();
     v.dedup();
@@ -116,7 +114,7 @@ fn entropy(points: &Vec<PointEntry>) -> u64 {
     s_x as u64 + s_y as u64
 }
 
-fn print_grid(points: &Vec<PointEntry>) {
+fn print_grid(points: &[PointEntry]) {
     let min_x = points.iter().min_by_key(|e| e.pos.x).unwrap().pos.x;
     let min_y = points.iter().min_by_key(|e| e.pos.y).unwrap().pos.y;
     let max_x = points.iter().max_by_key(|e| e.pos.x).unwrap().pos.x;
