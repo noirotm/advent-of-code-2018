@@ -21,8 +21,8 @@ impl Solver for Problem {
 
         let mut result = BufReader::new(r)
             .lines()
-            .filter_map(|l| l.ok())
-            .filter_map(|s| {
+            .flatten()
+            .flat_map(|s| {
                 let date = date_re.captures(s.as_str())?.get(1)?.as_str();
                 let date = Utc.datetime_from_str(date, "%Y-%m-%d %H:%M").ok()?;
                 let event = if let Some(c) = shift_re.captures(s.as_str()) {
@@ -74,7 +74,7 @@ impl Solver for Problem {
                     if !guard_minutes.contains_key(&current_id) {
                         guard_minutes.insert(current_id, HashMap::new());
                     }
-                    let mut map = guard_minutes.get_mut(&current_id).unwrap();
+                    let map = guard_minutes.get_mut(&current_id).unwrap();
 
                     for i in minutes_range {
                         let n = map.get(&i).unwrap_or(&0) + 1;

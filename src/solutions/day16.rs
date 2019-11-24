@@ -92,11 +92,7 @@ impl Solver for Problem {
         for tc in input.tests.iter() {
             let results = test_all_for_input(tc.before, tc.opcode);
 
-            let n = results
-                .iter()
-                .filter(|&&(_, r)| r == tc.after)
-                .collect::<Vec<_>>()
-                .len();
+            let n = results.iter().filter(|&&(_, r)| r == tc.after).count();
 
             if n >= 3 {
                 count += 1;

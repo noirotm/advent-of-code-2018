@@ -1,6 +1,5 @@
 // generate file that dynamically instanciates all solutions
 use chrono::prelude::*;
-use std::env;
 use std::error::Error;
 use std::fs::read_dir;
 use std::fs::File;
@@ -12,10 +11,10 @@ use std::fs;
 
 fn days(input_dir: &str) -> io::Result<Vec<u32>> {
     Ok(read_dir(input_dir)?
-        .filter_map(|e| e.ok())
+        .flatten()
         .filter(|e| e.path().is_file())
-        .filter_map(|e| e.file_name().into_string().ok())
-        .filter_map(|s| {
+        .flat_map(|e| e.file_name().into_string())
+        .flat_map(|s| {
             str::from_utf8(&s.into_bytes()[3..])
                 .ok()
                 .and_then(|v| v.parse::<u32>().ok())
@@ -34,10 +33,10 @@ where
 
         // if any of the input files is more recent than our module, we are outdated
         let mod_outdated = read_dir(input_dir)?
-            .filter_map(|e| e.ok())
+            .flatten()
             .filter(|e| e.path().is_file())
-            .filter_map(|e| e.metadata().ok())
-            .filter_map(|m| m.created().ok())
+            .flat_map(|e| e.metadata())
+            .flat_map(|m| m.created())
             .any(|input_ctime| input_ctime > mod_mtime);
 
         Ok(mod_outdated)

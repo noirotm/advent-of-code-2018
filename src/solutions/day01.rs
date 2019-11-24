@@ -14,8 +14,8 @@ impl Solver for Problem {
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<i64> {
         let r = BufReader::new(r);
         r.lines()
-            .filter_map(|l| l.ok())
-            .filter_map(|l| l.parse().ok())
+            .flatten()
+            .flat_map(|l| l.parse())
             .collect()
     }
 
@@ -29,7 +29,7 @@ impl Solver for Problem {
 
         frequencies.insert(0);
 
-        for v in input.iter().cycle() {
+        for &v in input.iter().cycle() {
             frequency += v;
             if frequencies.contains(&frequency) {
                 return frequency;

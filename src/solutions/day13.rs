@@ -252,10 +252,7 @@ impl Turn {
             (Turn::Right, Dir::Right) => Dir::Down,
             (Turn::Right, Dir::Up) => Dir::Right,
             (Turn::Right, Dir::Down) => Dir::Left,
-            (Turn::Straight, Dir::Left) => Dir::Left,
-            (Turn::Straight, Dir::Right) => Dir::Right,
-            (Turn::Straight, Dir::Up) => Dir::Up,
-            (Turn::Straight, Dir::Down) => Dir::Down,
+            (Turn::Straight, &dir) => dir,
         }
     }
 }

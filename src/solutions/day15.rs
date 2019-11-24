@@ -89,11 +89,7 @@ impl Map {
         let cells = r
             .lines()
             .filter_map(|l| l.ok())
-            .map(|l| {
-                l.chars()
-                    .filter_map(|c| Elem::from_char(c))
-                    .collect::<Vec<_>>()
-            })
+            .map(|l| l.chars().filter_map(Elem::from_char).collect::<Vec<_>>())
             .collect::<Vec<_>>();
 
         let h = cells.len();
@@ -228,7 +224,7 @@ impl Map {
         Status::Continue
     }
 
-    fn attack(&mut self, enemies: &Vec<UnitPos>) {
+    fn attack(&mut self, enemies: &[UnitPos]) {
         let min_hp = enemies.iter().map(|e| e.unit.hp).min().unwrap();
 
         for enemy in enemies.iter() {
@@ -324,14 +320,9 @@ impl Map {
             }
         }
 
-        // find closest destination
-        if closest_dest.is_none() {
-            return None;
-        }
-
         // iterate back from destination to source to find the best starting points
         // neighbours are searched in reading order, so we prioritize top, then left
-        let mut pos = closest_dest.unwrap().clone();
+        let mut pos = closest_dest?.clone();
         while costs[pos.y][pos.x] != 1 {
             for p in pos.neighbours().iter() {
                 if costs[p.y][p.x] < costs[pos.y][pos.x] {

@@ -15,12 +15,12 @@ impl Solver for Problem {
     fn parse_input<R: io::Read>(&self, r: R) -> Vec<Pt> {
         let r = BufReader::new(r);
         r.lines()
-            .filter_map(|l| l.ok())
-            .map(|line| {
+            .flatten()
+            .flat_map(|line| {
                 let mut s = line.split(", ");
-                let x = s.next().unwrap().parse().unwrap();
-                let y = s.next().unwrap().parse().unwrap();
-                Pt { x, y }
+                let x = s.next()?.parse().ok()?;
+                let y = s.next()?.parse().ok()?;
+                Some(Pt { x, y })
             })
             .collect()
     }

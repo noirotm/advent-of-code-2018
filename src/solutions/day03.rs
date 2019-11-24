@@ -18,8 +18,8 @@ impl Solver for Problem {
 
         BufReader::new(r)
             .lines()
-            .filter_map(|l| l.ok())
-            .filter_map(|s| {
+            .flatten()
+            .flat_map(|s| {
                 re.captures(s.as_str()).and_then(|c| {
                     Some(Rectangle {
                         id: c.get(1)?.as_str().parse().ok()?,
